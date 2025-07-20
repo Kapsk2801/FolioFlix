@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Github, Linkedin, Mail, Download } from 'lucide-react';
+import { Profile } from '../data/profiles';
 
-const Hero = () => {
+interface HeroProps {
+  profile: Profile;
+}
+
+const Hero: React.FC<HeroProps> = ({ profile }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -34,25 +39,27 @@ const Hero = () => {
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
             <span className="text-white">Hello, I'm </span>
             <span className="text-red-500 relative">
-              John Doe
+              {profile.name}
               <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-red-700 rounded-full"></span>
             </span>
           </h1>
           
           <p className="text-xl sm:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Full Stack Developer & UI/UX Enthusiast
+            {profile.role}
           </p>
           
           <p className="text-lg text-gray-400 mb-12 max-w-3xl mx-auto">
-            Crafting exceptional digital experiences with modern technologies. 
-            Passionate about creating clean, efficient code and beautiful user interfaces.
+            {profile.description}
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
-            <button className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-red-500/25 flex items-center gap-2">
+            <a 
+              href={profile.resume}
+              className="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-red-500/25 flex items-center gap-2"
+            >
               <Download size={20} />
               Download Resume
-            </button>
+            </a>
             <button 
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               className="border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
@@ -63,9 +70,9 @@ const Hero = () => {
           
           <div className="flex justify-center space-x-6">
             {[
-              { icon: Github, href: '#', label: 'GitHub' },
-              { icon: Linkedin, href: '#', label: 'LinkedIn' },
-              { icon: Mail, href: '#', label: 'Email' }
+              { icon: Github, href: profile.github, label: 'GitHub' },
+              { icon: Linkedin, href: profile.linkedin, label: 'LinkedIn' },
+              { icon: Mail, href: profile.email, label: 'Email' }
             ].map((social, index) => (
               <a
                 key={social.label}

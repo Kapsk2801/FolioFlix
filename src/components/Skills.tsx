@@ -1,22 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Profile } from '../data/profiles';
 
-const Skills = () => {
+interface SkillsProps {
+  profile: Profile;
+}
+
+const Skills: React.FC<SkillsProps> = ({ profile }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [animatedBars, setAnimatedBars] = useState<boolean[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
 
-  const skills = [
-    { name: 'React/Next.js', level: 95, category: 'Frontend' },
-    { name: 'TypeScript', level: 90, category: 'Language' },
-    { name: 'Node.js/Express', level: 88, category: 'Backend' },
-    { name: 'Python/Django', level: 85, category: 'Backend' },
-    { name: 'PostgreSQL/MongoDB', level: 82, category: 'Database' },
-    { name: 'AWS/Docker', level: 80, category: 'DevOps' },
-    { name: 'Tailwind CSS', level: 92, category: 'Styling' },
-    { name: 'GraphQL', level: 78, category: 'API' }
-  ];
+  const skills = profile.skills;
 
-  const categories = ['Frontend', 'Backend', 'Language', 'Database', 'DevOps', 'Styling', 'API'];
+  const categories = [...new Set(skills.map(skill => skill.category))];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -119,11 +115,18 @@ const Skills = () => {
               <div className="mt-8 p-6 bg-gradient-to-r from-red-500/10 to-red-600/10 rounded-xl border border-red-500/20">
                 <h4 className="text-white font-semibold mb-3">Currently Learning</h4>
                 <div className="flex flex-wrap gap-2">
-                  {['Rust', 'WebAssembly', 'Three.js', 'Blockchain'].map((tech) => (
-                    <span key={tech} className="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-sm border border-red-500/30">
-                      {tech}
-                    </span>
-                  ))}
+                  {profile.id === 'saksham' 
+                    ? ['Rust', 'WebAssembly', 'Three.js', 'Blockchain'].map((tech) => (
+                        <span key={tech} className="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-sm border border-red-500/30">
+                          {tech}
+                        </span>
+                      ))
+                    : ['Go', 'Kubernetes', 'GraphQL', 'Serverless'].map((tech) => (
+                        <span key={tech} className="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-sm border border-red-500/30">
+                          {tech}
+                        </span>
+                      ))
+                  }
                 </div>
               </div>
             </div>

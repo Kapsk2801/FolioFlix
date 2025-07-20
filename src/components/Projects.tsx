@@ -1,84 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ExternalLink, Github, Eye, X } from 'lucide-react';
+import { Profile, Project } from '../data/profiles';
 
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  tags: string[];
-  demoUrl: string;
-  githubUrl: string;
-  featured: boolean;
+interface ProjectsProps {
+  profile: Profile;
 }
 
-const Projects = () => {
+const Projects: React.FC<ProjectsProps> = ({ profile }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: 'E-Commerce Platform',
-      description: 'A full-stack e-commerce solution with React, Node.js, and PostgreSQL. Features include user authentication, payment processing, inventory management, and admin dashboard.',
-      image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'AWS'],
-      demoUrl: '#',
-      githubUrl: '#',
-      featured: true
-    },
-    {
-      id: 2,
-      title: 'Task Management App',
-      description: 'A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.',
-      image: 'https://images.pexels.com/photos/3153201/pexels-photo-3153201.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['React', 'Firebase', 'Material-UI', 'WebSocket'],
-      demoUrl: '#',
-      githubUrl: '#',
-      featured: true
-    },
-    {
-      id: 3,
-      title: 'Weather Dashboard',
-      description: 'A beautiful weather dashboard with location-based forecasts, interactive maps, and data visualization using modern web technologies.',
-      image: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['Vue.js', 'Chart.js', 'OpenWeather API', 'Tailwind CSS'],
-      demoUrl: '#',
-      githubUrl: '#',
-      featured: false
-    },
-    {
-      id: 4,
-      title: 'Social Media App',
-      description: 'A modern social media platform with posts, stories, messaging, and real-time notifications.',
-      image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['React Native', 'Node.js', 'MongoDB', 'Socket.io'],
-      demoUrl: '#',
-      githubUrl: '#',
-      featured: false
-    },
-    {
-      id: 5,
-      title: 'AI Image Generator',
-      description: 'An AI-powered image generation tool using machine learning models with a beautiful user interface.',
-      image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['Python', 'TensorFlow', 'React', 'FastAPI'],
-      demoUrl: '#',
-      githubUrl: '#',
-      featured: true
-    },
-    {
-      id: 6,
-      title: 'Portfolio Website',
-      description: 'A responsive portfolio website with modern animations, dark theme, and optimized performance.',
-      image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
-      tags: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-      demoUrl: '#',
-      githubUrl: '#',
-      featured: false
-    }
-  ];
+  const projects: Project[] = profile.projects;
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -190,6 +123,7 @@ const Projects = () => {
               <button
                 onClick={() => setSelectedProject(null)}
                 className="absolute top-4 right-4 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors duration-300"
+                aria-label="Close project modal"
               >
                 <X size={20} />
               </button>

@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import ProfileSelector from './ProfileSelector';
+import { Profile } from '../data/profiles';
 
-const Header = () => {
+interface HeaderProps {
+  selectedProfile: Profile;
+  onProfileSelect: (profile: Profile) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ selectedProfile, onProfileSelect }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isProfileSelectorOpen, setIsProfileSelectorOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,7 +54,22 @@ const Header = () => {
             </div>
           </div>
           
-          <div className="md:hidden">
+          <div className="hidden md:block">
+            <ProfileSelector
+              selectedProfile={selectedProfile}
+              onProfileSelect={onProfileSelect}
+              isOpen={isProfileSelectorOpen}
+              onToggle={() => setIsProfileSelectorOpen(!isProfileSelectorOpen)}
+            />
+          </div>
+          
+          <div className="md:hidden flex items-center space-x-4">
+            <ProfileSelector
+              selectedProfile={selectedProfile}
+              onProfileSelect={onProfileSelect}
+              isOpen={isProfileSelectorOpen}
+              onToggle={() => setIsProfileSelectorOpen(!isProfileSelectorOpen)}
+            />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-300 hover:text-red-500 transition-colors duration-300"

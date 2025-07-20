@@ -1,7 +1,12 @@
 import React from 'react';
 import { Heart, ArrowUp } from 'lucide-react';
+import { Profile } from '../data/profiles';
 
-const Footer = () => {
+interface FooterProps {
+  profile: Profile;
+}
+
+const Footer: React.FC<FooterProps> = ({ profile }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -13,16 +18,17 @@ const Footer = () => {
           <div className="flex items-center space-x-2 text-gray-400 mb-4 md:mb-0">
             <span>Made with</span>
             <Heart className="text-red-500" size={16} fill="currentColor" />
-            <span>by John Doe</span>
+            <span>by {profile.name}</span>
           </div>
           
           <div className="flex items-center space-x-6">
             <p className="text-gray-400 text-sm">
-              © 2024 John Doe. All rights reserved.
+              © 2024 {profile.name}. All rights reserved.
             </p>
             <button
               onClick={scrollToTop}
               className="bg-red-500 hover:bg-red-600 text-white p-2 rounded-full transition-all duration-300 transform hover:scale-110"
+              aria-label="Scroll to top"
             >
               <ArrowUp size={16} />
             </button>

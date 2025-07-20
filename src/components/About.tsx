@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Code, Palette, Zap, Heart } from 'lucide-react';
+import { Profile } from '../data/profiles';
 
-const About = () => {
+interface AboutProps {
+  profile: Profile;
+}
+
+const About: React.FC<AboutProps> = ({ profile }) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -44,25 +49,19 @@ const About = () => {
                 Passionate Developer & Problem Solver
               </h3>
               <p className="text-gray-300 text-lg leading-relaxed">
-                With over 5 years of experience in web development, I specialize in creating 
-                modern, responsive applications using cutting-edge technologies. My journey 
-                started with a curiosity about how websites work, and it has evolved into a 
-                passion for crafting exceptional digital experiences.
+                {profile.about.experience}
               </p>
               <p className="text-gray-300 text-lg leading-relaxed">
-                I believe in writing clean, maintainable code and staying up-to-date with 
-                the latest industry trends. When I'm not coding, you'll find me exploring 
-                new technologies, contributing to open-source projects, or mentoring 
-                aspiring developers.
+                {profile.about.passion}
               </p>
               
               <div className="grid grid-cols-2 gap-6 pt-6">
                 <div className="text-center p-4 bg-gray-800/50 rounded-lg border border-gray-700">
-                  <div className="text-3xl font-bold text-red-500 mb-2">50+</div>
+                  <div className="text-3xl font-bold text-red-500 mb-2">{profile.about.stats.projects}+</div>
                   <div className="text-gray-300">Projects Completed</div>
                 </div>
                 <div className="text-center p-4 bg-gray-800/50 rounded-lg border border-gray-700">
-                  <div className="text-3xl font-bold text-red-500 mb-2">5+</div>
+                  <div className="text-3xl font-bold text-red-500 mb-2">{profile.about.stats.years}+</div>
                   <div className="text-gray-300">Years Experience</div>
                 </div>
               </div>
