@@ -44,7 +44,7 @@ export const profiles: Profile[] = [
     name: 'Saksham Rajeev Kapoor',
     role: 'Full Stack Developer & UI/UX Enthusiast',
     description: 'Crafting exceptional digital experiences with modern technologies. Passionate about creating clean, efficient code and beautiful user interfaces.',
-    avatar: '👨‍💻',
+    avatar: 'SK',
     github: 'https://github.com/Kapsk2801',
     linkedin: 'https://www.linkedin.com/in/sakshamrkapoor',
     email: 'mailto:kapoorsaksham25@gmail.com',
@@ -93,11 +93,11 @@ export const profiles: Profile[] = [
       }
     ],
     about: {
-      experience: 'With over 5 years of experience in web development, I specialize in creating modern, responsive applications using cutting-edge technologies. My journey started with a curiosity about how websites work, and it has evolved into a passion for crafting exceptional digital experiences.',
-      passion: 'I believe in writing clean, maintainable code and staying up-to-date with the latest industry trends. When I\'m not coding, you\'ll find me exploring new technologies, contributing to open-source projects, or mentoring aspiring developers.',
+      experience: 'With 2+ years of experience in web development, I specialize in creating modern, responsive applications using cutting-edge technologies. My journey started with a curiosity about how websites work, and it has evolved into a passion for crafting exceptional digital experiences.',
+      passion: 'I believe in writing clean, maintainable code and staying up-to-date with the latest industry trends. When I\'m not coding, you\'ll find me exploring new technologies, contributing to open-source projects, and collaborating with fellow developers.',
       stats: {
-        projects: 50,
-        years: 5
+        projects: 10,
+        years: 2
       }
     }
   },
@@ -106,7 +106,7 @@ export const profiles: Profile[] = [
     name: 'Aayush Chawla',
     role: 'Full Stack Developer & Tech Enthusiast',
     description: 'Building innovative solutions with cutting-edge technologies. Focused on scalable architecture and user-centric design.',
-    avatar: '👨‍💻',
+    avatar: 'AC',
     github: 'https://github.com/Aayush-Chawla',
     linkedin: 'https://www.linkedin.com/in/aayush-chawla-1952b9224?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BXQTOXF71R3OqmV2BkS9eZQ%3D%3D',
     email: 'mailto:aayushchawla5554@gmail.com',
@@ -155,11 +155,11 @@ export const profiles: Profile[] = [
       }
     ],
     about: {
-      experience: 'With 4 years of experience in full-stack development, I focus on building scalable and maintainable applications. My expertise lies in Vue.js ecosystem and Laravel framework, creating robust solutions for complex business requirements.',
-      passion: 'I\'m passionate about microservices architecture and cloud-native development. When not coding, I enjoy exploring new technologies, contributing to open-source projects, and sharing knowledge with the developer community.',
+      experience: 'With 2+ years of experience in full-stack development, I focus on building scalable and maintainable applications. My expertise lies in Vue.js ecosystem and Laravel framework, creating robust solutions for complex business requirements.',
+      passion: 'I\'m passionate about microservices architecture and cloud-native development. When not coding, I enjoy exploring new technologies, contributing to open-source projects, and collaborating with the developer community.',
       stats: {
-        projects: 35,
-        years: 4
+        projects: 10,
+        years: 2
       }
     }
   }

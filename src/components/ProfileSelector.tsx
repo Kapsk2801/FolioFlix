@@ -53,7 +53,7 @@ const ProfileSelector: React.FC<ProfileSelectorProps> = ({
         onClick={toggleDropdown}
         className="flex items-center space-x-2 text-gray-300 hover:text-red-500 transition-all duration-300 bg-gray-800/50 px-3 py-2 rounded-lg border border-gray-700 hover:border-red-500/50"
       >
-        <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">
+        <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg">
           {selectedProfile.avatar}
         </div>
         <span className="hidden sm:block text-sm font-medium max-w-24 truncate">
@@ -67,25 +67,36 @@ const ProfileSelector: React.FC<ProfileSelectorProps> = ({
 
       {/* Profile Dropdown */}
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 w-80 bg-gray-900 border border-gray-700 rounded-lg shadow-xl z-50 overflow-hidden">
+        <div className="absolute top-full right-0 mt-2 w-80 bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-600 rounded-xl shadow-2xl z-50 overflow-hidden backdrop-blur-sm">
           <div className="p-4">
-            <h3 className="text-white font-semibold mb-4 text-center">Choose Profile</h3>
+            <div className="flex items-center justify-center space-x-3 mb-4">
+              <div className="w-8 h-8 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-md border border-gray-600 overflow-hidden relative">
+                <img 
+                  src="/Logo.png" 
+                  alt="FolioFlix Logo" 
+                  className="absolute inset-0 w-full h-full object-cover transform translate-x-0.5 -translate-y-0.5"
+                />
+              </div>
+              <h3 className="text-white font-semibold text-lg">Switch Profile</h3>
+            </div>
             <div className="space-y-3">
               {profiles.map((profile) => (
                 <div
                   key={profile.id}
                   className={`relative group cursor-pointer ${
                     selectedProfile.id === profile.id
-                      ? 'bg-red-500 text-white'
-                      : 'text-gray-300 hover:bg-gray-800'
+                      ? 'bg-gradient-to-r from-red-500 to-red-600 text-white shadow-lg'
+                      : 'text-gray-300 hover:bg-gray-800/50'
                   } rounded-lg transition-all duration-200`}
                   onMouseEnter={() => setHoveredProfile(profile.id)}
                   onMouseLeave={() => setHoveredProfile(null)}
                   onClick={() => handleProfileSwitch(profile)}
                 >
                   <div className="flex items-center space-x-3 p-3">
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white text-lg ${
-                      selectedProfile.id === profile.id ? 'bg-red-600' : 'bg-red-500'
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white text-base font-bold shadow-lg ${
+                      selectedProfile.id === profile.id 
+                        ? 'bg-gradient-to-br from-red-600 to-red-800' 
+                        : 'bg-gradient-to-br from-red-500 to-red-700'
                     }`}>
                       {profile.avatar}
                     </div>
@@ -94,17 +105,21 @@ const ProfileSelector: React.FC<ProfileSelectorProps> = ({
                       <div className="text-xs opacity-75 line-clamp-1">{profile.role}</div>
                     </div>
                     {selectedProfile.id === profile.id && (
-                      <div className="w-2 h-2 bg-white rounded-full"></div>
+                      <div className="w-3 h-3 bg-white rounded-full shadow-sm flex items-center justify-center">
+                        <div className="w-1 h-1 bg-red-600 rounded-full"></div>
+                      </div>
                     )}
                   </div>
                   
                   {/* Hover overlay for non-selected profiles */}
                   {selectedProfile.id !== profile.id && hoveredProfile === profile.id && (
-                    <div className="absolute inset-0 bg-red-500/95 rounded-lg flex items-center justify-center transition-all duration-200">
-                      <div className="text-white font-semibold text-sm flex items-center space-x-2">
-                        <User size={16} />
-                        <span>Switch Account</span>
-                      </div>
+                    <div className="absolute inset-0 bg-red-500/20 backdrop-blur-sm rounded-lg flex items-center justify-center transition-all duration-200 border border-red-500/30">
+                                        <div className="text-red-300 font-semibold text-sm flex items-center space-x-2">
+                    <div className="w-4 h-4 border-2 border-red-300 rounded-full flex items-center justify-center">
+                      <div className="w-1.5 h-1.5 bg-red-300 rounded-full"></div>
+                    </div>
+                    <span>Switch Account</span>
+                  </div>
                     </div>
                   )}
                 </div>
