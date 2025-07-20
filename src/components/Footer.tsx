@@ -24,7 +24,7 @@ const Footer: React.FC<FooterProps> = ({ profile }) => {
               />
             </div>
             <span className="text-sm sm:text-base">Made with</span>
-            <Heart className="text-red-500" size={14} className="sm:w-4 sm:h-4" fill="currentColor" />
+            <Heart className="text-red-500 sm:w-4 sm:h-4" size={14} fill="currentColor" />
             <span className="text-sm sm:text-base">by {profile.name}</span>
           </div>
           

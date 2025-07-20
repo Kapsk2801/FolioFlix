@@ -100,7 +100,7 @@ const Contact: React.FC<ContactProps> = ({ profile }) => {
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     <div className="bg-red-500/10 w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center">
-                      <info.icon className="text-red-500" size={20} className="sm:w-6 sm:h-6" />
+                                              <info.icon className="text-red-500 sm:w-6 sm:h-6" size={20} />
                     </div>
                     <div>
                       <h4 className="text-white font-semibold text-sm sm:text-base">{info.title}</h4>
