@@ -51,33 +51,33 @@ const ProfileSelector: React.FC<ProfileSelectorProps> = ({
       {/* Profile Button */}
       <button
         onClick={toggleDropdown}
-        className="flex items-center space-x-2 text-gray-300 hover:text-red-500 transition-all duration-300 bg-gray-800/50 px-3 py-2 rounded-lg border border-gray-700 hover:border-red-500/50"
+        className="flex items-center space-x-1 sm:space-x-2 text-gray-300 hover:text-red-500 transition-all duration-300 bg-gray-800/50 px-2 sm:px-3 py-2 rounded-lg border border-gray-700 hover:border-red-500/50"
       >
-        <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg">
+        <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-red-500 to-red-700 rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg">
           {selectedProfile.avatar}
         </div>
-        <span className="hidden sm:block text-sm font-medium max-w-24 truncate">
+        <span className="hidden sm:block text-xs sm:text-sm font-medium max-w-16 sm:max-w-24 truncate">
           {selectedProfile.name.split(' ')[0]}
         </span>
         <ChevronDown 
-          size={16} 
-          className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} 
+          size={14} 
+          className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''} hidden sm:block`} 
         />
       </button>
 
       {/* Profile Dropdown */}
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 w-80 bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-600 rounded-xl shadow-2xl z-50 overflow-hidden backdrop-blur-sm">
-          <div className="p-4">
-            <div className="flex items-center justify-center space-x-3 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-md border border-gray-600 overflow-hidden relative">
+        <div className="absolute top-full right-0 mt-2 w-72 sm:w-80 bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-600 rounded-xl shadow-2xl z-50 overflow-hidden backdrop-blur-sm">
+          <div className="p-3 sm:p-4">
+            <div className="flex items-center justify-center space-x-2 sm:space-x-3 mb-4">
+              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-md border border-gray-600 overflow-hidden relative">
                 <img 
                   src="/Logo.png" 
                   alt="FolioFlix Logo" 
                   className="absolute inset-0 w-full h-full object-cover transform translate-x-0.5 -translate-y-0.5"
                 />
               </div>
-              <h3 className="text-white font-semibold text-lg">Switch Profile</h3>
+              <h3 className="text-white font-semibold text-sm sm:text-lg">Switch Profile</h3>
             </div>
             <div className="space-y-3">
               {profiles.map((profile) => (
@@ -92,8 +92,8 @@ const ProfileSelector: React.FC<ProfileSelectorProps> = ({
                   onMouseLeave={() => setHoveredProfile(null)}
                   onClick={() => handleProfileSwitch(profile)}
                 >
-                  <div className="flex items-center space-x-3 p-3">
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white text-base font-bold shadow-lg ${
+                  <div className="flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3">
+                    <div className={`w-8 h-8 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-white text-xs sm:text-base font-bold shadow-lg ${
                       selectedProfile.id === profile.id 
                         ? 'bg-gradient-to-br from-red-600 to-red-800' 
                         : 'bg-gradient-to-br from-red-500 to-red-700'
@@ -101,7 +101,7 @@ const ProfileSelector: React.FC<ProfileSelectorProps> = ({
                       {profile.avatar}
                     </div>
                     <div className="flex-1 text-left">
-                      <div className="font-medium">{profile.name}</div>
+                      <div className="font-medium text-sm sm:text-base">{profile.name}</div>
                       <div className="text-xs opacity-75 line-clamp-1">{profile.role}</div>
                     </div>
                     {selectedProfile.id === profile.id && (

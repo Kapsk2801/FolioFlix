@@ -76,52 +76,52 @@ const Contact: React.FC<ContactProps> = ({ profile }) => {
     <section ref={sectionRef} id="contact" className="py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4">
             Get In <span className="text-red-500">Touch</span>
           </h2>
-          <div className="w-24 h-1 bg-red-500 mx-auto mb-16 rounded-full"></div>
+          <div className="w-20 sm:w-24 h-1 bg-red-500 mx-auto mb-12 sm:mb-16 rounded-full"></div>
           
           <div className="grid lg:grid-cols-2 gap-12">
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               <div>
-                <h3 className="text-2xl font-semibold text-white mb-6">Let's Work Together</h3>
-                <p className="text-gray-300 text-lg leading-relaxed mb-8">
+                <h3 className="text-xl sm:text-2xl font-semibold text-white mb-4 sm:mb-6">Let's Work Together</h3>
+                <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
                   I'm always excited to work on new projects and collaborate with talented individuals. 
                   Whether you have a project in mind or just want to say hello, feel free to reach out!
                 </p>
               </div>
               
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {contactInfo.map((info, index) => (
                   <a
                     key={info.title}
                     href={info.link}
-                    className={`flex items-center space-x-4 p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:border-red-500/50 transition-all duration-300 hover:transform hover:scale-105 ${isVisible ? 'animate-fadeIn' : ''}`}
+                    className={`flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:border-red-500/50 transition-all duration-300 hover:transform hover:scale-105 ${isVisible ? 'animate-fadeIn' : ''}`}
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <div className="bg-red-500/10 w-12 h-12 rounded-lg flex items-center justify-center">
-                      <info.icon className="text-red-500" size={24} />
+                    <div className="bg-red-500/10 w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center">
+                      <info.icon className="text-red-500" size={20} className="sm:w-6 sm:h-6" />
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold">{info.title}</h4>
-                      <p className="text-gray-400">{info.value}</p>
+                      <h4 className="text-white font-semibold text-sm sm:text-base">{info.title}</h4>
+                      <p className="text-gray-400 text-sm sm:text-base">{info.value}</p>
                     </div>
                   </a>
                 ))}
               </div>
               
-              <div className="mt-8 p-6 bg-gradient-to-r from-red-500/10 to-red-600/10 rounded-xl border border-red-500/20">
-                <h4 className="text-white font-semibold mb-3">Response Time</h4>
-                <p className="text-gray-300">
+              <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-gradient-to-r from-red-500/10 to-red-600/10 rounded-xl border border-red-500/20">
+                <h4 className="text-white font-semibold mb-2 sm:mb-3 text-sm sm:text-base">Response Time</h4>
+                <p className="text-gray-300 text-sm sm:text-base">
                   I typically respond to messages within 24 hours. For urgent inquiries, 
                   please feel free to call me directly.
                 </p>
               </div>
             </div>
             
-            <div className="bg-gray-800/50 p-8 rounded-xl border border-gray-700">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-gray-800/50 p-4 sm:p-6 lg:p-8 rounded-xl border border-gray-700">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
                       Name *

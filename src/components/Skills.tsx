@@ -67,12 +67,12 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
     <section ref={sectionRef} id="skills" className="py-20 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+        <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
             <span className="text-white">Technical </span>
             <span className="text-red-600">Skills</span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto px-4">
             Technologies and tools I work with
           </p>
         </div>
@@ -82,23 +82,23 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
           {Object.entries(categories).map(([category, categorySkills], categoryIndex) => (
             <div 
               key={category} 
-              className={`bg-black/40 backdrop-blur-sm rounded-lg p-8 border border-gray-800/50 transition-all duration-1000 ${
+              className={`bg-black/40 backdrop-blur-sm rounded-lg p-4 sm:p-6 lg:p-8 border border-gray-800/50 transition-all duration-1000 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
               style={{ transitionDelay: `${categoryIndex * 200}ms` }}
             >
-              <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
-                <div className="p-2 bg-red-600 rounded-lg">
-                  <Code size={24} />
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8 flex items-center gap-2 sm:gap-3">
+                <div className="p-1.5 sm:p-2 bg-red-600 rounded-lg">
+                  <Code size={20} className="sm:w-6 sm:h-6" />
                 </div>
                 {category}
               </h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {categorySkills.map((skill, index) => (
                   <div
                     key={skill.name}
-                    className={`bg-black/30 backdrop-blur-sm rounded-lg p-6 border border-gray-700/50 hover:border-red-600/50 transition-all duration-500 ${
+                    className={`bg-black/30 backdrop-blur-sm rounded-lg p-4 sm:p-6 border border-gray-700/50 hover:border-red-600/50 transition-all duration-500 ${
                       isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                     }`}
                     style={{ 
@@ -106,9 +106,9 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
                       animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none'
                     }}
                   >
-                    <div className="flex items-center justify-between mb-4">
-                      <h4 className="text-lg font-semibold text-white">{skill.name}</h4>
-                      <span className="text-2xl font-bold text-red-500">{skill.level}%</span>
+                    <div className="flex items-center justify-between mb-3 sm:mb-4">
+                      <h4 className="text-base sm:text-lg font-semibold text-white">{skill.name}</h4>
+                      <span className="text-xl sm:text-2xl font-bold text-red-500">{skill.level}%</span>
                     </div>
                     
                     <div className="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden">
@@ -127,30 +127,30 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
         </div>
 
         {/* Stats Section */}
-        <div className={`mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 transition-all duration-1000 ${
+        <div className={`mt-12 sm:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`} style={{ transitionDelay: '800ms' }}>
-          <div className="bg-black/40 backdrop-blur-sm rounded-lg p-6 text-center border border-gray-800/50">
-            <div className="text-3xl font-bold text-red-500 mb-2">{skills.length}</div>
-            <div className="text-gray-400">Total Skills</div>
+          <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 sm:p-6 text-center border border-gray-800/50">
+            <div className="text-2xl sm:text-3xl font-bold text-red-500 mb-2">{skills.length}</div>
+            <div className="text-gray-400 text-sm sm:text-base">Total Skills</div>
           </div>
-          <div className="bg-black/40 backdrop-blur-sm rounded-lg p-6 text-center border border-gray-800/50">
-            <div className="text-3xl font-bold text-red-500 mb-2">
+          <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 sm:p-6 text-center border border-gray-800/50">
+            <div className="text-2xl sm:text-3xl font-bold text-red-500 mb-2">
               {Math.round(skills.reduce((acc, skill) => acc + skill.level, 0) / skills.length)}%
             </div>
-            <div className="text-gray-400">Average Level</div>
+            <div className="text-gray-400 text-sm sm:text-base">Average Level</div>
           </div>
-          <div className="bg-black/40 backdrop-blur-sm rounded-lg p-6 text-center border border-gray-800/50">
-            <div className="text-3xl font-bold text-red-500 mb-2">
+          <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 sm:p-6 text-center border border-gray-800/50">
+            <div className="text-2xl sm:text-3xl font-bold text-red-500 mb-2">
               {skills.filter(s => s.level >= 80).length}
             </div>
-            <div className="text-gray-400">Advanced Skills</div>
+            <div className="text-gray-400 text-sm sm:text-base">Advanced Skills</div>
           </div>
-          <div className="bg-black/40 backdrop-blur-sm rounded-lg p-6 text-center border border-gray-800/50">
-            <div className="text-3xl font-bold text-red-500 mb-2">
+          <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 sm:p-6 text-center border border-gray-800/50">
+            <div className="text-2xl sm:text-3xl font-bold text-red-500 mb-2">
               {Object.keys(categories).length}
             </div>
-            <div className="text-gray-400">Categories</div>
+            <div className="text-gray-400 text-sm sm:text-base">Categories</div>
           </div>
         </div>
       </div>

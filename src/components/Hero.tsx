@@ -15,6 +15,8 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [parallaxOffset, setParallaxOffset] = useState({ x: 0, y: 0 });
   const [hoveredElement, setHoveredElement] = useState<string | null>(null);
+  const [particles, setParticles] = useState<Array<{id: number, x: number, y: number, size: number, speed: number}>>([]);
+  const [skillCounter, setSkillCounter] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -32,6 +34,31 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
     }
 
     return () => observer.disconnect();
+  }, []);
+
+  // Initialize floating particles
+  useEffect(() => {
+    const newParticles = Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      size: Math.random() * 3 + 1,
+      speed: Math.random() * 0.5 + 0.1
+    }));
+    setParticles(newParticles);
+  }, []);
+
+  // Animate particles
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setParticles(prev => prev.map(particle => ({
+        ...particle,
+        x: particle.x + Math.sin(particle.y * 0.01) * 0.5,
+        y: particle.y < -10 ? window.innerHeight + 10 : particle.y - particle.speed
+      })));
+    }, 50);
+
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -79,6 +106,27 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
     }
   }, [currentIndex, profile.role, loadingProgress]);
 
+  // Animate skill counter
+  useEffect(() => {
+    if (showSkills) {
+      const targetCount = profile.skills.length;
+      const increment = targetCount / 30;
+      let currentCount = 0;
+      
+      const counterInterval = setInterval(() => {
+        currentCount += increment;
+        if (currentCount >= targetCount) {
+          setSkillCounter(targetCount);
+          clearInterval(counterInterval);
+        } else {
+          setSkillCounter(Math.floor(currentCount));
+        }
+      }, 50);
+
+      return () => clearInterval(counterInterval);
+    }
+  }, [showSkills, profile.skills.length]);
+
   // Get top skills for badges
   const topSkills = profile.skills
     .sort((a, b) => b.level - a.level)
@@ -93,6 +141,23 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
 
   return (
     <section ref={sectionRef} id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* Floating particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {particles.map(particle => (
+          <div
+            key={particle.id}
+            className="absolute bg-red-500/20 rounded-full animate-pulse"
+            style={{
+              left: `${particle.x}px`,
+              top: `${particle.y}px`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              animationDelay: `${particle.id * 0.1}s`
+            }}
+          />
+        ))}
+      </div>
+
       {/* Enhanced loading overlay with smoother animation */}
       {loadingProgress < 100 && (
         <div className="absolute inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center">
@@ -134,7 +199,7 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
         }}></div>
       </div>
       
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-32">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           {/* Enhanced gradient text with smooth animation */}
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6">
@@ -242,6 +307,17 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
               </a>
             ))}
           </div>
+
+          {/* Dynamic skill counter */}
+          {showSkills && (
+            <div className="mt-8 text-center">
+              <div className="inline-flex items-center gap-2 bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full border border-red-600/30">
+                <span className="text-red-400 text-sm">Mastered</span>
+                <span className="text-red-500 font-bold text-lg">{skillCounter}</span>
+                <span className="text-red-400 text-sm">Technologies</span>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       

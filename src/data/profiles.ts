@@ -68,7 +68,7 @@ export const profiles: Profile[] = [
         image: 'https://images.pexels.com/photos/4056723/pexels-photo-4056723.jpeg?auto=compress&cs=tinysrgb&w=800',
         tags: ['Android Studio', 'Java', 'Fitness Tracking', 'UI/UX', 'Health Monitoring'],
         demoUrl: '#',
-        githubUrl: '#',
+        githubUrl: 'https://github.com/Aayush-Chawla/Nirvana-Fitness-App',
         featured: true
       },
       {
@@ -78,7 +78,7 @@ export const profiles: Profile[] = [
         image: 'https://images.pexels.com/photos/3153201/pexels-photo-3153201.jpeg?auto=compress&cs=tinysrgb&w=800',
         tags: ['Web Development', 'Accessibility', 'User Management', 'Real-time Updates', 'Admin Dashboard'],
         demoUrl: '#',
-        githubUrl: '#',
+        githubUrl: 'https://github.com/Kapsk2801/Lost-Found',
         featured: true
       },
       {
@@ -88,7 +88,7 @@ export const profiles: Profile[] = [
         image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
         tags: ['Python', 'Streamlit', 'Data Analysis', 'Visualization', 'Health Analytics'],
         demoUrl: '#',
-        githubUrl: '#',
+        githubUrl: 'https://github.com/Aayush-Chawla/Dietary-Patterns-DAP',
         featured: true
       },
       {
@@ -98,7 +98,7 @@ export const profiles: Profile[] = [
         image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800',
         tags: ['React', 'Node.js', 'Anonymous Reviews', 'Privacy', 'User Experience'],
         demoUrl: '#',
-        githubUrl: '#',
+        githubUrl: 'https://github.com/Kapsk2801/VibedBack',
         featured: false
       },
       {
@@ -108,17 +108,7 @@ export const profiles: Profile[] = [
         image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
         tags: ['Skill Exchange', 'Collaborative Learning', 'User Matching', 'Community Building'],
         demoUrl: '#',
-        githubUrl: '#',
-        featured: false
-      },
-      {
-        id: 6,
-        title: 'LostAndFound - College Item Recovery',
-        description: 'A specialized lost and found system designed specifically for college campuses. Features include item categorization, location tracking, and streamlined recovery processes to help students quickly locate their lost belongings.',
-        image: 'https://images.pexels.com/photos/3153201/pexels-photo-3153201.jpeg?auto=compress&cs=tinysrgb&w=800',
-        tags: ['Campus Solution', 'Item Recovery', 'Location Tracking', 'Student Portal'],
-        demoUrl: '#',
-        githubUrl: '#',
+        githubUrl: 'https://github.com/Kapsk2801/ChakDeCoders',
         featured: false
       }
     ],
@@ -126,7 +116,7 @@ export const profiles: Profile[] = [
       experience: 'With 2+ years of experience in web development, I specialize in creating modern, responsive applications using cutting-edge technologies. My journey started with a curiosity about how websites work, and it has evolved into a passion for crafting exceptional digital experiences.',
       passion: 'I believe in writing clean, maintainable code and staying up-to-date with the latest industry trends. When I\'m not coding, you\'ll find me exploring new technologies, contributing to open-source projects, and collaborating with fellow developers.',
       stats: {
-        projects: 6,
+        projects: 5,
         years: 2
       }
     }
@@ -143,52 +133,91 @@ export const profiles: Profile[] = [
     phone: '+91 8765432109',
     resume: '#',
     skills: [
-      { name: 'Vue.js/Nuxt.js', level: 92, category: 'Frontend' },
-      { name: 'JavaScript/TypeScript', level: 88, category: 'Language' },
-      { name: 'Laravel/PHP', level: 85, category: 'Backend' },
-      { name: 'MySQL/MongoDB', level: 80, category: 'Database' },
-      { name: 'Docker/Kubernetes', level: 78, category: 'DevOps' },
-      { name: 'SCSS/Stylus', level: 90, category: 'Styling' },
-      { name: 'REST APIs', level: 85, category: 'API' },
-      { name: 'Microservices', level: 75, category: 'Architecture' }
+      { name: 'Python', level: 90, category: 'Programming Languages' },
+      { name: 'JavaScript', level: 88, category: 'Programming Languages' },
+      { name: 'Java', level: 85, category: 'Programming Languages' },
+      { name: 'React.js', level: 92, category: 'Web Development' },
+      { name: 'Node.js', level: 88, category: 'Web Development' },
+      { name: 'Express.js', level: 85, category: 'Web Development' },
+      { name: 'Tailwind CSS', level: 90, category: 'Web Development' },
+      { name: 'ShadCN', level: 85, category: 'Web Development' },
+      { name: 'GSAP', level: 80, category: 'Web Development' },
+      { name: 'MySQL', level: 85, category: 'Database' },
+      { name: 'MongoDB', level: 82, category: 'Database' },
+      { name: 'Firebase', level: 80, category: 'Database' },
+      { name: 'Android Studio', level: 85, category: 'Tools & Productivity' },
+      { name: 'Streamlit', level: 88, category: 'Tools & Productivity' },
+      { name: 'Git', level: 90, category: 'Tools & Productivity' },
+      { name: 'GitHub', level: 92, category: 'Tools & Productivity' },
+      { name: 'Vercel', level: 85, category: 'Tools & Productivity' }
     ],
     projects: [
       {
         id: 1,
-        title: 'Social Media Platform',
-        description: 'A modern social media platform with posts, stories, messaging, and real-time notifications built with Vue.js and Laravel.',
+        title: 'BlueForce - NGO Website',
+        description: 'A comprehensive NGO website for an organization that conducts beach cleaning drives and environmental conservation activities. Features include event management, donation systems, volunteer registration, and impact tracking.',
         image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800',
-        tags: ['Vue.js', 'Laravel', 'MySQL', 'Socket.io'],
+        tags: ['React.js', 'Node.js', 'Environmental Conservation', 'NGO Platform', 'Event Management'],
         demoUrl: '#',
-        githubUrl: '#',
+        githubUrl: 'https://github.com/Aayush-Chawla/BlueForce',
         featured: true
       },
       {
         id: 2,
+        title: 'Nirvana Fitness Tracker App',
+        description: 'Designed and developed a fitness tracking app using Android Studio, featuring calorie tracking, custom workout plans, and meal recognition. Focused on creating a user-friendly interface with personalized health monitoring features.',
+        image: 'https://images.pexels.com/photos/4056723/pexels-photo-4056723.jpeg?auto=compress&cs=tinysrgb&w=800',
+        tags: ['Android Studio', 'Java', 'Fitness Tracking', 'UI/UX', 'Health Monitoring'],
+        demoUrl: '#',
+        githubUrl: 'https://github.com/Aayush-Chawla/Nirvana-Fitness-App',
+        featured: true
+      },
+      {
+        id: 3,
+        title: 'Retrievio Lost & Found',
+        description: 'Developed a Lost and Found web application for college users to report and locate lost items efficiently. Implemented audio narration features to support visually impaired users and enabled user interactions through comments and claim submissions.',
+        image: 'https://images.pexels.com/photos/3153201/pexels-photo-3153201.jpeg?auto=compress&cs=tinysrgb&w=800',
+        tags: ['Web Development', 'Accessibility', 'User Management', 'Real-time Updates', 'Admin Dashboard'],
+        demoUrl: '#',
+        githubUrl: 'https://github.com/Kapsk2801/Lost-Found',
+        featured: true
+      },
+      {
+        id: 4,
+        title: 'Indian Dietary Pattern Analysis',
+        description: 'Analyzed Indian dietary patterns and their correlation with fitness levels across age groups. Developed interactive visualizations using Streamlit to explore macronutrient intake and fitness relationships.',
+        image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
+        tags: ['Python', 'Streamlit', 'Data Analysis', 'Visualization', 'Health Analytics'],
+        demoUrl: '#',
+        githubUrl: 'https://github.com/Aayush-Chawla/Dietary-Patterns-DAP',
+        featured: false
+      },
+      {
+        id: 5,
         title: 'Microservices Architecture',
         description: 'A scalable microservices-based application with Docker containers, Kubernetes orchestration, and API gateway.',
         image: 'https://images.pexels.com/photos/3153201/pexels-photo-3153201.jpeg?auto=compress&cs=tinysrgb&w=800',
         tags: ['Docker', 'Kubernetes', 'Node.js', 'MongoDB'],
         demoUrl: '#',
         githubUrl: '#',
-        featured: true
+        featured: false
       },
       {
-        id: 3,
+        id: 6,
         title: 'Real-time Chat Application',
         description: 'A real-time chat application with video calling, file sharing, and group management features.',
         image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-        tags: ['Vue.js', 'WebRTC', 'Socket.io', 'Express'],
+        tags: ['React.js', 'WebRTC', 'Socket.io', 'Express'],
         demoUrl: '#',
         githubUrl: '#',
-        featured: true
+        featured: false
       }
     ],
     about: {
-      experience: 'With 2+ years of experience in full-stack development, I focus on building scalable and maintainable applications. My expertise lies in Vue.js ecosystem and Laravel framework, creating robust solutions for complex business requirements.',
-      passion: 'I\'m passionate about microservices architecture and cloud-native development. When not coding, I enjoy exploring new technologies, contributing to open-source projects, and collaborating with the developer community.',
+      experience: 'With 2+ years of experience in full-stack development, I focus on building scalable and maintainable applications. My expertise lies in React.js ecosystem and modern web technologies, creating robust solutions for complex business requirements.',
+      passion: 'I\'m passionate about environmental conservation and using technology for social good. When not coding, I enjoy exploring new technologies, contributing to open-source projects, and participating in environmental initiatives.',
       stats: {
-        projects: 10,
+        projects: 6,
         years: 2
       }
     }
