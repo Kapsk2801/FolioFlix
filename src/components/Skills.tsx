@@ -11,6 +11,27 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
+  // Add state for tech joke toast
+  const [showJokeToast, setShowJokeToast] = useState(false);
+  const [jokeToastMessage, setJokeToastMessage] = useState('');
+  // Array of tech jokes
+  const techJokes = [
+    "Why do programmers prefer dark mode? Because light attracts bugs!",
+    "I would tell you a UDP joke, but you might not get it.",
+    "There are only 10 types of people in the world: those who understand binary and those who don't.",
+    "A SQL query walks into a bar, walks up to two tables and asks: 'Can I join you?'",
+    "To understand recursion, you must first understand recursion.",
+    "Why do Java developers wear glasses? Because they don't see sharp.",
+    "Real programmers count from 0."
+  ];
+  // Handler for skill badge click
+  const handleSkillClick = () => {
+    const randomJoke = techJokes[Math.floor(Math.random() * techJokes.length)];
+    setJokeToastMessage(randomJoke);
+    setShowJokeToast(true);
+    setTimeout(() => setShowJokeToast(false), 3500);
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -76,7 +97,7 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
 
   return (
     <section ref={sectionRef} id="skills" className="py-20 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-2 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
@@ -116,6 +137,7 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
                       transitionDelay: `${(categoryIndex * 200) + (index * 100)}ms`,
                       animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none'
                     }}
+                    onClick={handleSkillClick}
                   >
                     <div className="flex items-center justify-between mb-2 sm:mb-3 lg:mb-4">
                       <h4 className="text-sm sm:text-base lg:text-lg font-semibold text-white">{skill.name}</h4>
@@ -165,6 +187,13 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
           </div>
         </div>
       </div>
+
+      {/* Tech Joke Toast */}
+      {showJokeToast && (
+        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white px-6 py-3 rounded-lg shadow-lg border border-red-600 z-50 animate-fade-in text-sm">
+          {jokeToastMessage}
+        </div>
+      )}
 
       <style>{`
         @keyframes fadeInUp {

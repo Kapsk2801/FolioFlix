@@ -31,10 +31,6 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
   const [skillCounter, setSkillCounter] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Quantum Code Rain effect state and refs
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [rainActive, setRainActive] = useState(true);
-
   // Easter Egg: Secret Keyboard Combo ("FOLIO")
   const [easterEggActive, setEasterEggActive] = useState(false);
   const [keyBuffer, setKeyBuffer] = useState<string[]>([]);
@@ -109,16 +105,6 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
     drawConfetti();
     return () => cancelAnimationFrame(animationFrameId);
   }, [easterEggActive]);
-
-  // Live Animated Time/Date
-  const [now, setNow] = useState(new Date());
-  useInterval(() => setNow(new Date()), 1000);
-  // Responsive time string: short on mobile, full on desktop
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
-  const timeString = isMobile
-    ? now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    : now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  const dateString = now.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
 
   // Hacker Console Typing Effect
   const [consoleText, setConsoleText] = useState('');
@@ -262,106 +248,6 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
     return <Zap size={16} />;
   };
 
-  // Quantum Code Rain effect
-  useEffect(() => {
-    if (!rainActive) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationFrameId: number;
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    let fontSize = 18;
-    let columns = Math.floor(width / fontSize);
-    let drops = Array(columns).fill(1);
-    let mouse = { x: width / 2, y: height / 2 };
-    const techWords = [profile.name, ...profile.skills.map(s => s.name), 'React', 'TypeScript', 'AI', 'Cloud', 'SQL', 'Node', 'Web', 'UI', 'UX'];
-    const charset = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
-    let wordColumns: { [col: number]: string } = {};
-    let wordTimers: { [col: number]: number } = {};
-
-    function resize() {
-      if (!canvas) return;
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-      columns = Math.floor(width / fontSize);
-      drops = Array(columns).fill(1);
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    function draw() {
-      if (!ctx) return;
-      ctx.fillStyle = 'rgba(0,0,0,0.08)';
-      ctx.fillRect(0, 0, width, height);
-      ctx.font = `${fontSize}px monospace`;
-      ctx.textAlign = 'center';
-
-      for (let i = 0; i < columns; i++) {
-        // Occasionally pick a tech word for a column
-        if (!wordColumns[i] && Math.random() < 0.002) {
-          wordColumns[i] = techWords[Math.floor(Math.random() * techWords.length)].toUpperCase();
-          wordTimers[i] = fontSize * wordColumns[i].length + Math.random() * 100;
-        }
-        // Draw word if assigned
-        if (wordColumns[i]) {
-          const word = wordColumns[i];
-          for (let j = 0; j < word.length; j++) {
-            let x = i * fontSize;
-            let y = (drops[i] - word.length + j) * fontSize;
-            // Mouse repulsion
-            const dx = x - mouse.x;
-            const dy = y - mouse.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            let offsetY = 0;
-            if (dist < 120) offsetY = (120 - dist) * 0.7;
-            ctx.fillStyle = `hsl(${340 + j * 10}, 80%, 60%)`;
-            ctx.fillText(word[j], x + fontSize / 2, y - offsetY);
-          }
-          wordTimers[i]--;
-          if (wordTimers[i] <= 0) {
-            delete wordColumns[i];
-            delete wordTimers[i];
-          }
-        } else {
-          // Draw random character
-          let x = i * fontSize;
-          let y = drops[i] * fontSize;
-          // Mouse repulsion
-          const dx = x - mouse.x;
-          const dy = y - mouse.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          let offsetY = 0;
-          if (dist < 120) offsetY = (120 - dist) * 0.7;
-          ctx.fillStyle = 'rgba(255, 60, 60, 0.7)';
-          ctx.fillText(charset[Math.floor(Math.random() * charset.length)], x + fontSize / 2, y - offsetY);
-        }
-        // Move drop down
-        if (Math.random() > 0.975) drops[i] = 0;
-        drops[i]++;
-        if (drops[i] * fontSize > height + 100) drops[i] = 0;
-      }
-      animationFrameId = requestAnimationFrame(draw);
-    }
-    draw();
-
-    function handleMouse(e: MouseEvent) {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    }
-    window.addEventListener('mousemove', handleMouse);
-
-    return () => {
-      window.removeEventListener('resize', resize);
-      window.removeEventListener('mousemove', handleMouse);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, [profile, rainActive]);
-
   // Copy Email to Clipboard feature
   const [copied, setCopied] = useState(false);
   const handleCopyEmail = useCallback(() => {
@@ -377,7 +263,7 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
   const [auraMouse, setAuraMouse] = useState({ x: 0.5, y: 0.5 });
   // Update aura color based on time
   const getAuraColor = () => {
-    const hour = now.getHours();
+    const hour = new Date().getHours();
     if (hour >= 6 && hour < 12) return 'from-cyan-400 to-blue-500'; // Morning
     if (hour >= 12 && hour < 18) return 'from-pink-500 to-yellow-400'; // Afternoon
     if (hour >= 18 && hour < 22) return 'from-purple-600 to-red-500'; // Evening
@@ -415,21 +301,70 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
     localStorage.setItem('a2hs-dismissed', '1');
   };
 
+  // Add state for the funny popup
+  const [showResumePopup, setShowResumePopup] = useState(false);
+  const [resumePopupMessage, setResumePopupMessage] = useState('');
+
+  // Array of random funny messages
+  const resumeMessages = [
+    "This resume is locked away in a secret vault guarded by ninja squirrels. To access it, you must first defeat them in a dance battle. Or, you know, just contact me directly.",
+    "Oops! The resume is currently on vacation. Try contacting me for a postcard instead!",
+    "Access denied. The resume is classified and only available to those who can solve a Rubik's cube in under 30 seconds.",
+    "Sorry, the resume is being reviewed by a panel of wise owls. Please try again after their tea break.",
+    "Resume not found. But you found this message, so you must be special! Contact me for the real deal.",
+    "The resume is currently being upgraded to version 2.0. Meanwhile, let's chat!",
+    "Legend says only the worthy can view this resume. Are you the chosen one? Contact me to find out!"
+  ];
+
+  // Update the Download Resume handler
+  const handleDownloadResume = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+    const randomMsg = resumeMessages[Math.floor(Math.random() * resumeMessages.length)];
+    setResumePopupMessage(randomMsg);
+    setShowResumePopup(true);
+  };
+
+  // Add state for the funny contact popup
+  const [showContactPopup, setShowContactPopup] = useState(false);
+  const [contactPopupMessage, setContactPopupMessage] = useState('');
+  // Add state for avatar tooltip
+  const [showAvatarTooltip, setShowAvatarTooltip] = useState(false);
+  const [avatarTooltipMessage, setAvatarTooltipMessage] = useState('');
+  // Funny messages for contact popup
+  const contactMessages = [
+    "Warning: Contacting may result in spontaneous high-fives and project success!",
+    "Caution: Developer may respond with memes.",
+    "Contacting now... Please wait while we brew some coffee.",
+    "You are about to enter the developer zone. Proceed with curiosity!",
+    "Contact initiated! Expect a reply with a side of humor."
+  ];
+  // Funny messages for avatar tooltip
+  const avatarMessages = [
+    "Careful, this developer bites (only bugs)!",
+    "100% bug-free (offer not valid on Mondays).",
+    "Runs on coffee and code.",
+    "Click for instant inspiration!",
+    "Warning: May cause code envy."
+  ];
+  // Handler for Contact button
+  const handleContactClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    const randomMsg = contactMessages[Math.floor(Math.random() * contactMessages.length)];
+    setContactPopupMessage(randomMsg);
+    setShowContactPopup(true);
+  };
+  // Handler for avatar hover
+  const handleAvatarMouseEnter = () => {
+    const randomMsg = avatarMessages[Math.floor(Math.random() * avatarMessages.length)];
+    setAvatarTooltipMessage(randomMsg);
+    setShowAvatarTooltip(true);
+  };
+  const handleAvatarMouseLeave = () => {
+    setShowAvatarTooltip(false);
+  };
+
   return (
     <section ref={sectionRef} id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Quantum Code Rain Canvas */}
-      <canvas
-        ref={canvasRef}
-        className="fixed inset-0 w-full h-full pointer-events-none z-0"
-        style={{
-          opacity: 0.18,
-          mixBlendMode: 'lighten',
-          filter: 'blur(0.5px) brightness(1.2)',
-          transition: 'opacity 0.5s',
-        }}
-        aria-hidden="true"
-        tabIndex={-1}
-      />
       {/* Confetti Canvas for Easter Egg */}
       {easterEggActive && (
         <canvas
@@ -446,11 +381,6 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
           <span>✨ You found the secret! ✨</span>
         </div>
       )}
-      {/* Live Time/Date Display */}
-      <div className="fixed top-6 right-4 sm:right-8 z-30 bg-black/60 px-3 sm:px-4 py-2 rounded-lg shadow border border-red-700 text-red-300 text-lg font-mono flex flex-col items-end animate-fade-in">
-        <span className="tracking-widest text-xl sm:text-2xl font-bold animate-pulse">{timeString}</span>
-        <span className="text-xs opacity-80 animate-fade-in-slow">{dateString}</span>
-      </div>
       {/* Hacker Console Typing Effect removed */}
 
       {/* Floating particles */}
@@ -521,7 +451,6 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
               <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-red-500 rounded-full animate-pulse"></span>
             </span>
           </h1>
-          
           {/* Enhanced typing animation with cursor */}
           <div className="text-xl sm:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed relative min-h-[2.5rem]">
             <span className="relative z-10">
@@ -529,7 +458,6 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
               <span className="animate-pulse text-red-500">|</span>
             </span>
           </div>
-          
           {/* Enhanced skill badges with hover effects */}
           {showSkills && (
             <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 px-4">
@@ -554,12 +482,10 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
               ))}
             </div>
           )}
-          
           {/* Enhanced description with fade-in */}
           <p className="text-lg text-gray-400 mb-12 max-w-3xl mx-auto">
             {profile.description}
           </p>
-          
           {/* Enhanced buttons with micro-interactions */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
             <a 
@@ -571,6 +497,7 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
               }}
               onMouseEnter={() => setHoveredElement('resume')}
               onMouseLeave={() => setHoveredElement(null)}
+              onClick={handleDownloadResume}
             >
               <span className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               <span className="relative z-10 flex items-center gap-2">
@@ -579,7 +506,7 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
               </span>
             </a>
             <button 
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={handleContactClick}
               className="group relative border-2 border-red-600 text-red-600 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 overflow-hidden"
               style={{
                 transform: hoveredElement === 'contact' ? 'scale(1.05) translateY(-2px)' : 'scale(1)',
@@ -588,8 +515,10 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
               onMouseEnter={() => setHoveredElement('contact')}
               onMouseLeave={() => setHoveredElement(null)}
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
-              <span className="relative z-10">Get In Touch</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <span className="relative z-10 flex items-center gap-2">
+                Contact
+              </span>
             </button>
           </div>
           
@@ -661,6 +590,41 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
           </button>
         </div>
       )}
+
+      {/* Funny Resume Popup */}
+      {showResumePopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+          <div className="bg-white text-black rounded-2xl shadow-2xl p-8 max-w-xs w-full flex flex-col items-center border-4 border-red-600 animate-fade-in">
+            <h2 className="text-xl font-bold mb-2">Nice Try!</h2>
+            <p className="mb-6 text-center">{resumePopupMessage}</p>
+            <button
+              onClick={() => setShowResumePopup(false)}
+              className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Funny Contact Popup */}
+      {showContactPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+          <div className="bg-white text-black rounded-2xl shadow-2xl p-8 max-w-xs w-full flex flex-col items-center border-4 border-red-600 animate-fade-in">
+            <h2 className="text-xl font-bold mb-2">Heads Up!</h2>
+            <p className="mb-6 text-center">{contactPopupMessage}</p>
+            <button
+              onClick={() => setShowContactPopup(false)}
+              className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Profile Avatar with Tooltip */}
+      {/* Removed Profile Avatar with Tooltip JSX block */}
 
       {/* CSS for smooth animations */}
       <style>{`

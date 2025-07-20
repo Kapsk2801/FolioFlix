@@ -74,7 +74,7 @@ const Contact: React.FC<ContactProps> = ({ profile }) => {
 
   return (
     <section ref={sectionRef} id="contact" className="py-20 bg-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-4">
             Get In <span className="text-red-500">Touch</span>

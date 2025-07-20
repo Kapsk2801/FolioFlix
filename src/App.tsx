@@ -13,10 +13,42 @@ function App() {
   const [cursorTrail, setCursorTrail] = useState<Array<{x: number, y: number, id: number}>>([]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+  // Add mascot state and logic
+  const mascotJokes = [
+    "Why do Java developers wear glasses? Because they don't see sharp!",
+    "A SQL query walks into a bar, walks up to two tables and asks: 'Can I join you?'",
+    "Why do programmers prefer dark mode? Because light attracts bugs!",
+    "There are only 10 types of people in the world: those who understand binary and those who don't.",
+    "To understand recursion, you must first understand recursion.",
+    "Why do programmers hate nature? It has too many bugs.",
+    "I would tell you a UDP joke, but you might not get it.",
+    "Debugging: Being the detective in a crime movie where you are also the murderer.",
+    "Real programmers count from 0."
+  ];
+  const [showMascot, setShowMascot] = useState(false);
+  const [mascotJoke, setMascotJoke] = useState(mascotJokes[0]);
+  const [mascotDirection, setMascotDirection] = useState<'left' | 'right'>('right');
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    let interval: NodeJS.Timeout;
+    const startMascot = () => {
+      setMascotJoke(mascotJokes[Math.floor(Math.random() * mascotJokes.length)]);
+      setMascotDirection(Math.random() > 0.5 ? 'right' : 'left');
+      setShowMascot(true);
+      timer = setTimeout(() => setShowMascot(false), 12000); // mascot walks for 12s
+    };
+    startMascot();
+    interval = setInterval(startMascot, 45000); // every 45s
+    return () => {
+      clearTimeout(timer);
+      clearInterval(interval);
+    };
+  }, []);
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
-      
       // Add new cursor trail point
       setCursorTrail(prev => {
         const newTrail = [...prev, { x: e.clientX, y: e.clientY, id: Date.now() }];
@@ -79,6 +111,58 @@ function App() {
         ))}
       </div>
 
+      {/* Animated Mascot */}
+      {showMascot && (
+        <div
+          className="fixed bottom-8 left-0 w-full flex items-end pointer-events-none z-[100]"
+          style={{ height: 120 }}
+        >
+          <div
+            className="relative"
+            style={{
+              left: mascotDirection === 'right' ? 0 : '100%',
+              animation: mascotDirection === 'right'
+                ? 'mascot-walk-right 12s linear forwards'
+                : 'mascot-walk-left 12s linear forwards',
+              width: 120,
+              height: 100
+            }}
+          >
+            {/* Mascot: Animated Pixel Duck (SVG with walk effect) */}
+            <div style={{ position: 'absolute', bottom: 0, left: 0, width: 80, height: 80, transform: mascotDirection === 'left' ? 'scaleX(-1)' : 'scaleX(1)' }}>
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Body */}
+                <ellipse cx="40" cy="55" rx="22" ry="18" fill="#ffe066" stroke="#fbbf24" strokeWidth="3"/>
+                {/* Head */}
+                <ellipse cx="55" cy="40" rx="13" ry="12" fill="#ffe066" stroke="#fbbf24" strokeWidth="3"/>
+                {/* Beak */}
+                <ellipse cx="67" cy="43" rx="5" ry="2.5" fill="#f59e42"/>
+                {/* Eye */}
+                <ellipse cx="60" cy="38" rx="2" ry="2.5" fill="#222"/>
+                {/* Wing */}
+                <ellipse cx="35" cy="60" rx="7" ry="4" fill="#fbbf24"/>
+                {/* Animated Feet */}
+                <g>
+                  <rect x="32" y="70" width="6" height="6" rx="2" fill="#f59e42">
+                    <animate attributeName="y" values="70;74;70" keyTimes="0;0.5;1" dur="0.6s" repeatCount="indefinite" />
+                  </rect>
+                  <rect x="42" y="70" width="6" height="6" rx="2" fill="#f59e42">
+                    <animate attributeName="y" values="74;70;74" keyTimes="0;0.5;1" dur="0.6s" repeatCount="indefinite" />
+                  </rect>
+                </g>
+              </svg>
+            </div>
+            {/* Sign with joke (never mirrored) */}
+            <div style={{ position: 'absolute', left: 70, bottom: 40, minWidth: 180, maxWidth: 260, transform: 'none' }}>
+              <div className="bg-white text-black border-2 border-yellow-400 rounded-lg shadow-lg px-4 py-2 text-sm font-bold animate-fade-in">
+                {mascotJoke}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* End Animated Mascot */}
+
       {/* Main content */}
       <div className="relative z-10">
         <Header 
@@ -115,6 +199,15 @@ function App() {
         
         ::-webkit-scrollbar-thumb:hover {
           background: linear-gradient(to bottom, #ef4444, #dc2626);
+        }
+
+        @keyframes mascot-walk-right {
+          0% { left: 0; }
+          100% { left: calc(100vw - 120px); }
+        }
+        @keyframes mascot-walk-left {
+          0% { left: calc(100vw - 120px); }
+          100% { left: 0; }
         }
       `}</style>
     </div>

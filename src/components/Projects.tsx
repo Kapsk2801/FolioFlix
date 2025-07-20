@@ -17,6 +17,27 @@ const Projects: React.FC<ProjectsProps> = ({ profile }) => {
   const [projectLoadProgress, setProjectLoadProgress] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
+  // Add state for project fortune toast
+  const [showProjectToast, setShowProjectToast] = useState(false);
+  const [projectToastMessage, setProjectToastMessage] = useState('');
+  // Array of project fortunes/funny messages
+  const projectFortunes = [
+    "This project was powered by coffee and late-night debugging.",
+    "Warning: May contain traces of genius.",
+    "100% bug-free (at time of deployment).",
+    "Built with more caffeine than code.",
+    "Legend says this project runs faster if you compliment it.",
+    "Handle with care: May cause inspiration.",
+    "Fun fact: This project once passed all tests on the first try."
+  ];
+  // Handler for project card hover/click
+  const handleProjectFortune = () => {
+    const randomFortune = projectFortunes[Math.floor(Math.random() * projectFortunes.length)];
+    setProjectToastMessage(randomFortune);
+    setShowProjectToast(true);
+    setTimeout(() => setShowProjectToast(false), 3500);
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -88,7 +109,7 @@ const Projects: React.FC<ProjectsProps> = ({ profile }) => {
 
   return (
     <section ref={sectionRef} id="projects" className="py-20 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 relative z-10">
         <div className={`text-center mb-12 sm:mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
             <span className="text-white">Featured </span>
@@ -182,9 +203,8 @@ const Projects: React.FC<ProjectsProps> = ({ profile }) => {
                   transform: hoveredProject === project.id ? 'scale(1.02) translateY(-4px)' : 'scale(1)',
                   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
-                onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(null)}
-                onClick={() => openModal(project.id)}
+                onMouseEnter={handleProjectFortune}
+                onClick={() => { openModal(project.id); handleProjectFortune(); }}
               >
                 {/* Enhanced border effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-700 opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-lg"></div>
@@ -338,6 +358,13 @@ const Projects: React.FC<ProjectsProps> = ({ profile }) => {
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Project Fortune Toast */}
+      {showProjectToast && (
+        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-black text-white px-6 py-3 rounded-lg shadow-lg border border-red-600 z-50 animate-fade-in text-sm">
+          {projectToastMessage}
         </div>
       )}
     </section>

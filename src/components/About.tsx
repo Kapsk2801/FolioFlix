@@ -45,7 +45,7 @@ const About: React.FC<AboutProps> = ({ profile }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-12">
           {/* Personal Information */}
           <div className="space-y-8">
             <div className={`bg-black/40 backdrop-blur-sm rounded-lg p-4 sm:p-6 lg:p-8 border border-gray-800/50 transition-all duration-1000 ${
@@ -146,35 +146,38 @@ const About: React.FC<AboutProps> = ({ profile }) => {
             </h3>
             
             <div className="space-y-6">
+              {/* 2024 */}
               <div className={`relative pl-8 border-l-2 border-red-600 transition-all duration-1000 ${
                 isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
               }`} style={{ transitionDelay: '800ms' }}>
                 <div className="absolute left-[-9px] top-0 w-4 h-4 bg-red-600 rounded-full"></div>
                 <div className="bg-black/30 backdrop-blur-sm rounded-lg p-4">
-                  <div className="text-sm text-gray-400">2020</div>
-                  <div className="text-lg font-bold text-white mb-2">Started Programming Journey</div>
-                  <div className="text-gray-300 text-sm">Began learning web development and programming fundamentals</div>
+                  <div className="text-sm text-gray-400">2024</div>
+                  <div className="text-lg font-bold text-white mb-2">Portfolio Launch</div>
+                  <div className="text-gray-300 text-sm">Created this comprehensive portfolio showcasing my work</div>
                 </div>
               </div>
 
+              {/* 2023 */}
               <div className={`relative pl-8 border-l-2 border-red-600 transition-all duration-1000 ${
                 isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
               }`} style={{ transitionDelay: '1000ms' }}>
                 <div className="absolute left-[-9px] top-0 w-4 h-4 bg-red-600 rounded-full"></div>
                 <div className="bg-black/30 backdrop-blur-sm rounded-lg p-4">
-                  <div className="text-sm text-gray-400">2021</div>
+                  <div className="text-sm text-gray-400">2023</div>
                   <div className="text-lg font-bold text-white mb-2">
-                    {profile.id === 'saksham' ? 'React & JavaScript Mastery' : 'First Project Completed'}
+                    {profile.id === 'saksham' ? 'AI & Advanced APIs' : 'Advanced Technologies'}
                   </div>
                   <div className="text-gray-300 text-sm">
-                    {profile.id === 'saksham' 
-                      ? 'Became proficient in React.js, JavaScript, and modern frontend development'
-                      : 'Built and deployed my first web application'
+                    {profile.id === 'saksham'
+                      ? 'Worked with Generative AI, REST APIs, and JWT Authentication'
+                      : 'Mastered modern frameworks and cloud technologies'
                     }
                   </div>
                 </div>
               </div>
 
+              {/* 2022 */}
               <div className={`relative pl-8 border-l-2 border-red-600 transition-all duration-1000 ${
                 isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
               }`} style={{ transitionDelay: '1200ms' }}>
@@ -193,32 +196,34 @@ const About: React.FC<AboutProps> = ({ profile }) => {
                 </div>
               </div>
 
+              {/* 2021 */}
               <div className={`relative pl-8 border-l-2 border-red-600 transition-all duration-1000 ${
                 isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
               }`} style={{ transitionDelay: '1400ms' }}>
                 <div className="absolute left-[-9px] top-0 w-4 h-4 bg-red-600 rounded-full"></div>
                 <div className="bg-black/30 backdrop-blur-sm rounded-lg p-4">
-                  <div className="text-sm text-gray-400">2023</div>
+                  <div className="text-sm text-gray-400">2021</div>
                   <div className="text-lg font-bold text-white mb-2">
-                    {profile.id === 'saksham' ? 'AI & Advanced APIs' : 'Advanced Technologies'}
+                    {profile.id === 'saksham' ? 'React & JavaScript Mastery' : 'First Project Completed'}
                   </div>
                   <div className="text-gray-300 text-sm">
-                    {profile.id === 'saksham'
-                      ? 'Worked with Generative AI, REST APIs, and JWT Authentication'
-                      : 'Mastered modern frameworks and cloud technologies'
+                    {profile.id === 'saksham' 
+                      ? 'Became proficient in React.js, JavaScript, and modern frontend development'
+                      : 'Built and deployed my first web application'
                     }
                   </div>
                 </div>
               </div>
 
+              {/* 2020 */}
               <div className={`relative pl-8 border-l-2 border-red-600 transition-all duration-1000 ${
                 isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
               }`} style={{ transitionDelay: '1600ms' }}>
                 <div className="absolute left-[-9px] top-0 w-4 h-4 bg-red-600 rounded-full"></div>
                 <div className="bg-black/30 backdrop-blur-sm rounded-lg p-4">
-                  <div className="text-sm text-gray-400">2024</div>
-                  <div className="text-lg font-bold text-white mb-2">Portfolio Launch</div>
-                  <div className="text-gray-300 text-sm">Created this comprehensive portfolio showcasing my work</div>
+                  <div className="text-sm text-gray-400">2020</div>
+                  <div className="text-lg font-bold text-white mb-2">Started Programming Journey</div>
+                  <div className="text-gray-300 text-sm">Began learning web development and programming fundamentals</div>
                 </div>
               </div>
             </div>

@@ -46,22 +46,22 @@ const Header: React.FC<HeaderProps> = ({ selectedProfile, onProfileSelect }) => 
         ></div>
       </div>
 
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
-            <div className="flex items-center space-x-2 sm:space-x-3">
+            <div className="flex items-center space-x-1 sm:space-x-2 md:space-x-3">
               <Logo size="md" />
-              <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-red-500 to-red-300 bg-clip-text text-transparent hover:from-red-400 hover:to-red-200 transition-all duration-300">FolioFlix</span>
+              <span className="text-base sm:text-lg md:text-xl font-bold bg-gradient-to-r from-red-500 to-red-300 bg-clip-text text-transparent hover:from-red-400 hover:to-red-200 transition-all duration-300">FolioFlix</span>
             </div>
           </div>
           
           <div className="hidden lg:block">
-            <div className="ml-6 lg:ml-10 flex items-baseline space-x-4 lg:space-x-8">
+            <div className="ml-2 sm:ml-6 lg:ml-10 flex items-baseline space-x-2 sm:space-x-4 lg:space-x-8">
               {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
-                  className="text-gray-300 hover:text-red-500 px-2 lg:px-3 py-2 text-sm font-medium transition-all duration-300 relative group"
+                  className="text-gray-300 hover:text-red-500 px-1 sm:px-2 lg:px-3 py-2 text-xs sm:text-sm font-medium transition-all duration-300 relative group"
                 >
                   {item}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
@@ -78,14 +78,15 @@ const Header: React.FC<HeaderProps> = ({ selectedProfile, onProfileSelect }) => 
             />
           </div>
           
-          <div className="lg:hidden flex items-center space-x-2 sm:space-x-4">
+          <div className="lg:hidden flex items-center space-x-1 sm:space-x-2 md:space-x-4">
             <ProfileSelector
               selectedProfile={selectedProfile}
               onProfileSelect={onProfileSelect}
             />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-300 hover:text-red-500 transition-all duration-300 p-1 relative group"
+              className="text-gray-300 hover:text-red-500 transition-all duration-300 p-1 relative group focus:outline-none"
+              aria-label="Open menu"
             >
               <div className="absolute inset-0 bg-red-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               {isMenuOpen ? <X size={20} className="sm:w-6 sm:h-6 relative z-10" /> : <Menu size={20} className="sm:w-6 sm:h-6 relative z-10" />}
@@ -94,13 +95,13 @@ const Header: React.FC<HeaderProps> = ({ selectedProfile, onProfileSelect }) => 
         </div>
         
         {isMenuOpen && (
-          <div className="lg:hidden bg-black/95 backdrop-blur-lg rounded-lg mt-2 p-4 mx-4 border border-gray-700/50">
-            <div className="flex flex-col space-y-3">
+          <div className="lg:hidden bg-black/95 backdrop-blur-lg rounded-lg mt-2 p-4 mx-2 sm:mx-4 border border-gray-700/50">
+            <div className="flex flex-col space-y-2 sm:space-y-3">
               {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item.toLowerCase())}
-                  className="text-gray-300 hover:text-red-500 text-left py-3 px-2 transition-all duration-300 text-sm sm:text-base hover:bg-red-500/10 rounded-lg group"
+                  className="text-gray-300 hover:text-red-500 text-left py-3 px-2 transition-all duration-300 text-sm sm:text-base hover:bg-red-500/10 rounded-lg group w-full"
                 >
                   <span className="flex items-center gap-2">
                     {item}
