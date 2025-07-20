@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Code, Database, Zap, Star } from 'lucide-react';
 import { Profile } from '../data/profiles';
 
 interface SkillsProps {
@@ -6,27 +7,16 @@ interface SkillsProps {
 }
 
 const Skills: React.FC<SkillsProps> = ({ profile }) => {
+  const [animateProgress, setAnimateProgress] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [animatedBars, setAnimatedBars] = useState<boolean[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
 
-  const skills = profile.skills;
-  
-
-  const categories = [...new Set(skills.map(skill => skill.category))];
-
   useEffect(() => {
-    // Reset animations when profile changes
-    setIsVisible(false);
-    setAnimatedBars([]);
-    
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          setTimeout(() => {
-            setAnimatedBars(new Array(skills.length).fill(true));
-          }, 500);
+          setTimeout(() => setAnimateProgress(true), 500);
         }
       },
       { threshold: 0.3 }
@@ -37,109 +27,146 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
     }
 
     return () => observer.disconnect();
-  }, [profile.id, skills.length]); // Re-run when profile changes
+  }, []);
 
-  const getCategoryColor = (category: string) => {
-    const colors: { [key: string]: string } = {
-      Frontend: 'bg-red-500',
-      Backend: 'bg-blue-500',
-      Language: 'bg-green-500',
-      Database: 'bg-purple-500',
-      DevOps: 'bg-orange-500',
-      Styling: 'bg-pink-500',
-      API: 'bg-cyan-500'
-    };
-    return colors[category] || 'bg-gray-500';
-  };
+  // Updated skills for Saksham
+  const skills = profile.id === 'saksham' ? [
+    { name: 'Python', level: 85, category: 'Programming Languages' },
+    { name: 'Java', level: 80, category: 'Programming Languages' },
+    { name: 'HTML', level: 95, category: 'Programming Languages' },
+    { name: 'CSS', level: 90, category: 'Programming Languages' },
+    { name: 'JavaScript', level: 88, category: 'Programming Languages' },
+    { name: 'MySQL', level: 75, category: 'Database' },
+    { name: 'SQLite', level: 70, category: 'Database' },
+    { name: 'Firebase', level: 65, category: 'Database' },
+    { name: 'Node.js', level: 82, category: 'Backend & Frameworks' },
+    { name: 'Express.js', level: 78, category: 'Backend & Frameworks' },
+    { name: 'REST APIs', level: 85, category: 'Backend & Frameworks' },
+    { name: 'Generative AI', level: 70, category: 'Backend & Frameworks' },
+    { name: 'JWT Authentication', level: 75, category: 'Backend & Frameworks' },
+    { name: 'React.js', level: 88, category: 'Web Development' },
+    { name: 'Git & GitHub', level: 85, category: 'Web Development' },
+    { name: 'Tailwind CSS', level: 90, category: 'Web Development' },
+    { name: 'VS Code', level: 95, category: 'Tools & Productivity' },
+    { name: 'Postman', level: 80, category: 'Tools & Productivity' },
+    { name: 'Power BI', level: 65, category: 'Tools & Productivity' },
+    { name: 'Figma', level: 70, category: 'Tools & Productivity' },
+    { name: 'Google Workspace', level: 85, category: 'Tools & Productivity' },
+    { name: 'Microsoft Office', level: 90, category: 'Tools & Productivity' }
+  ] : profile.skills;
 
-  const getCurrentlyLearning = () => {
-    if (profile.id === 'saksham') {
-      return ['Rust', 'WebAssembly', 'Three.js', 'Blockchain'];
-    } else if (profile.id === 'aayush') {
-      return ['Go', 'Kubernetes', 'GraphQL', 'Serverless'];
-    }
-    return ['React Native', 'Machine Learning', 'Cloud Computing'];
+  const categories = {
+    'Programming Languages': skills.filter(s => s.category === 'Programming Languages'),
+    'Database': skills.filter(s => s.category === 'Database'),
+    'Backend & Frameworks': skills.filter(s => s.category === 'Backend & Frameworks'),
+    'Web Development': skills.filter(s => s.category === 'Web Development'),
+    'Tools & Productivity': skills.filter(s => s.category === 'Tools & Productivity')
   };
 
   return (
-    <section ref={sectionRef} id="skills" className="py-20 bg-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4">
-            My <span className="text-red-500">Skills</span>
+    <section ref={sectionRef} id="skills" className="py-20 relative overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+            <span className="text-white">Technical </span>
+            <span className="text-red-600">Skills</span>
           </h2>
-          <div className="w-24 h-1 bg-red-500 mx-auto mb-16 rounded-full"></div>
-          
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div className="space-y-8">
-              <h3 className="text-2xl font-semibold text-white mb-6">Technical Expertise</h3>
-              {skills.map((skill, index) => (
-                <div key={`${profile.id}-${skill.name}`} className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-white font-medium">{skill.name}</span>
-                    <span className="text-gray-400">{skill.level}%</span>
-                  </div>
-                  <div className="w-full bg-gray-800 rounded-full h-3 overflow-hidden">
-                    <div
-                      className={`h-full bg-gradient-to-r from-red-500 to-red-600 rounded-full transition-all duration-1000 ease-out ${
-                        animatedBars[index] ? '' : 'w-0'
-                      }`}
-                      style={{ 
-                        width: animatedBars[index] ? `${skill.level}%` : '0%',
-                        transitionDelay: `${index * 100}ms`
-                      }}
-                    ></div>
-                  </div>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            Technologies and tools I work with
+          </p>
+        </div>
+
+        {/* Skills Grid */}
+        <div className="space-y-12">
+          {Object.entries(categories).map(([category, categorySkills], categoryIndex) => (
+            <div 
+              key={category} 
+              className={`bg-black/40 backdrop-blur-sm rounded-lg p-8 border border-gray-800/50 transition-all duration-1000 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+              style={{ transitionDelay: `${categoryIndex * 200}ms` }}
+            >
+              <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                <div className="p-2 bg-red-600 rounded-lg">
+                  <Code size={24} />
                 </div>
-              ))}
-            </div>
-            
-            <div className="space-y-6">
-              <h3 className="text-2xl font-semibold text-white mb-6">Skill Categories</h3>
-              <div className="grid grid-cols-2 gap-4">
-                {categories.map((category, index) => {
-                  const categorySkills = skills.filter(skill => skill.category === category);
-                  const avgLevel = categorySkills.reduce((sum, skill) => sum + skill.level, 0) / categorySkills.length;
-                  
-                  return (
-                    <div
-                      key={`${profile.id}-${category}`}
-                      className={`bg-gray-800/50 p-4 rounded-xl border border-gray-700 hover:border-red-500/50 transition-all duration-300 hover:transform hover:scale-105 ${isVisible ? 'animate-fadeIn' : ''}`}
-                      style={{ animationDelay: `${index * 0.1}s` }}
-                    >
-                      <div className={`w-8 h-8 ${getCategoryColor(category)} rounded-lg mb-3 opacity-80`}></div>
-                      <h4 className="text-white font-semibold mb-2">{category}</h4>
-                      <div className="flex items-center space-x-2">
-                        <div className="flex-1 bg-gray-700 rounded-full h-2">
-                          <div
-                            className={`h-full ${getCategoryColor(category)} rounded-full transition-all duration-1000`}
-                            style={{ 
-                              width: isVisible ? `${avgLevel}%` : '0%',
-                              transitionDelay: `${index * 100}ms`
-                            }}
-                          ></div>
-                        </div>
-                        <span className="text-xs text-gray-400">{Math.round(avgLevel)}%</span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+                {category}
+              </h3>
               
-              <div className="mt-8 p-6 bg-gradient-to-r from-red-500/10 to-red-600/10 rounded-xl border border-red-500/20">
-                <h4 className="text-white font-semibold mb-3">Currently Learning</h4>
-                <div className="flex flex-wrap gap-2">
-                  {getCurrentlyLearning().map((tech) => (
-                    <span key={`${profile.id}-${tech}`} className="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-sm border border-red-500/30">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {categorySkills.map((skill, index) => (
+                  <div
+                    key={skill.name}
+                    className={`bg-black/30 backdrop-blur-sm rounded-lg p-6 border border-gray-700/50 hover:border-red-600/50 transition-all duration-500 ${
+                      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                    }`}
+                    style={{ 
+                      transitionDelay: `${(categoryIndex * 200) + (index * 100)}ms`,
+                      animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none'
+                    }}
+                  >
+                    <div className="flex items-center justify-between mb-4">
+                      <h4 className="text-lg font-semibold text-white">{skill.name}</h4>
+                      <span className="text-2xl font-bold text-red-500">{skill.level}%</span>
+                    </div>
+                    
+                    <div className="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden">
+                      <div
+                        className="h-3 bg-gradient-to-r from-red-600 to-red-500 rounded-full transition-all duration-1000 ease-out"
+                        style={{
+                          width: animateProgress ? `${skill.level}%` : '0%'
+                        }}
+                      ></div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* Stats Section */}
+        <div className={`mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 transition-all duration-1000 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`} style={{ transitionDelay: '800ms' }}>
+          <div className="bg-black/40 backdrop-blur-sm rounded-lg p-6 text-center border border-gray-800/50">
+            <div className="text-3xl font-bold text-red-500 mb-2">{skills.length}</div>
+            <div className="text-gray-400">Total Skills</div>
+          </div>
+          <div className="bg-black/40 backdrop-blur-sm rounded-lg p-6 text-center border border-gray-800/50">
+            <div className="text-3xl font-bold text-red-500 mb-2">
+              {Math.round(skills.reduce((acc, skill) => acc + skill.level, 0) / skills.length)}%
+            </div>
+            <div className="text-gray-400">Average Level</div>
+          </div>
+          <div className="bg-black/40 backdrop-blur-sm rounded-lg p-6 text-center border border-gray-800/50">
+            <div className="text-3xl font-bold text-red-500 mb-2">
+              {skills.filter(s => s.level >= 80).length}
+            </div>
+            <div className="text-gray-400">Advanced Skills</div>
+          </div>
+          <div className="bg-black/40 backdrop-blur-sm rounded-lg p-6 text-center border border-gray-800/50">
+            <div className="text-3xl font-bold text-red-500 mb-2">
+              {Object.keys(categories).length}
+            </div>
+            <div className="text-gray-400">Categories</div>
           </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </section>
   );
 };

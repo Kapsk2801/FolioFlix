@@ -63,40 +63,70 @@ export const profiles: Profile[] = [
     projects: [
       {
         id: 1,
-        title: 'E-Commerce Platform',
-        description: 'A full-stack e-commerce solution with React, Node.js, and PostgreSQL. Features include user authentication, payment processing, inventory management, and admin dashboard.',
-        image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
-        tags: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'AWS'],
+        title: 'Nirvana Fitness Tracker App',
+        description: 'Designed and developed a fitness tracking app using Android Studio, featuring calorie tracking, custom workout plans, and meal recognition. Focused on creating a user-friendly interface with personalized health monitoring features to enhance user engagement and promote fitness goals.',
+        image: 'https://images.pexels.com/photos/4056723/pexels-photo-4056723.jpeg?auto=compress&cs=tinysrgb&w=800',
+        tags: ['Android Studio', 'Java', 'Fitness Tracking', 'UI/UX', 'Health Monitoring'],
         demoUrl: '#',
         githubUrl: '#',
         featured: true
       },
       {
         id: 2,
-        title: 'Task Management App',
-        description: 'A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.',
+        title: 'Retrievio Lost & Found',
+        description: 'Developed a Lost and Found web application for college users to report and locate lost items efficiently. Implemented audio narration features to support visually impaired users. Enabled user interactions through comments, claim submissions, and a verified approval process to ensure secure item recovery.',
         image: 'https://images.pexels.com/photos/3153201/pexels-photo-3153201.jpeg?auto=compress&cs=tinysrgb&w=800',
-        tags: ['React', 'Firebase', 'Material-UI', 'WebSocket'],
+        tags: ['Web Development', 'Accessibility', 'User Management', 'Real-time Updates', 'Admin Dashboard'],
         demoUrl: '#',
         githubUrl: '#',
         featured: true
       },
       {
         id: 3,
-        title: 'AI Image Generator',
-        description: 'An AI-powered image generation tool using machine learning models with a beautiful user interface.',
+        title: 'Indian Dietary Pattern Analysis',
+        description: 'Analyzed Indian dietary patterns and their correlation with fitness levels across age groups. Developed interactive visualizations using Streamlit to explore macronutrient intake and fitness relationships. Identified key nutritional trends influencing physical health outcomes.',
         image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
-        tags: ['Python', 'TensorFlow', 'React', 'FastAPI'],
+        tags: ['Python', 'Streamlit', 'Data Analysis', 'Visualization', 'Health Analytics'],
         demoUrl: '#',
         githubUrl: '#',
         featured: true
+      },
+      {
+        id: 4,
+        title: 'VibedBack - Anonymous College Review Platform',
+        description: 'An anonymous platform for college students to share reviews and experiences. Built with modern web technologies to provide a safe space for honest feedback while maintaining user privacy and data security.',
+        image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800',
+        tags: ['React', 'Node.js', 'Anonymous Reviews', 'Privacy', 'User Experience'],
+        demoUrl: '#',
+        githubUrl: '#',
+        featured: false
+      },
+      {
+        id: 5,
+        title: 'SkillSwap - Skill Exchange Platform',
+        description: 'A platform where people can exchange skills and knowledge. Users can offer their expertise in exchange for learning new skills from others, creating a collaborative learning environment.',
+        image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800',
+        tags: ['Skill Exchange', 'Collaborative Learning', 'User Matching', 'Community Building'],
+        demoUrl: '#',
+        githubUrl: '#',
+        featured: false
+      },
+      {
+        id: 6,
+        title: 'LostAndFound - College Item Recovery',
+        description: 'A specialized lost and found system designed specifically for college campuses. Features include item categorization, location tracking, and streamlined recovery processes to help students quickly locate their lost belongings.',
+        image: 'https://images.pexels.com/photos/3153201/pexels-photo-3153201.jpeg?auto=compress&cs=tinysrgb&w=800',
+        tags: ['Campus Solution', 'Item Recovery', 'Location Tracking', 'Student Portal'],
+        demoUrl: '#',
+        githubUrl: '#',
+        featured: false
       }
     ],
     about: {
       experience: 'With 2+ years of experience in web development, I specialize in creating modern, responsive applications using cutting-edge technologies. My journey started with a curiosity about how websites work, and it has evolved into a passion for crafting exceptional digital experiences.',
       passion: 'I believe in writing clean, maintainable code and staying up-to-date with the latest industry trends. When I\'m not coding, you\'ll find me exploring new technologies, contributing to open-source projects, and collaborating with fellow developers.',
       stats: {
-        projects: 10,
+        projects: 6,
         years: 2
       }
     }

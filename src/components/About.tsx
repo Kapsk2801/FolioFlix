@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Code, Palette, Zap, Heart } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Calendar, MapPin, GraduationCap, Briefcase, Award, Star } from 'lucide-react';
 import { Profile } from '../data/profiles';
 
 interface AboutProps {
@@ -7,17 +7,16 @@ interface AboutProps {
 }
 
 const About: React.FC<AboutProps> = ({ profile }) => {
+  const [animateStats, setAnimateStats] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    // Reset visibility when profile changes
-    setIsVisible(false);
-    
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          setTimeout(() => setAnimateStats(true), 500);
         }
       },
       { threshold: 0.3 }
@@ -28,63 +27,211 @@ const About: React.FC<AboutProps> = ({ profile }) => {
     }
 
     return () => observer.disconnect();
-  }, [profile.id]); // Re-run when profile changes
+  }, []);
 
-  const highlights = [
-    { icon: Code, title: 'Clean Code', description: 'Writing maintainable and efficient code' },
-    { icon: Palette, title: 'Design Focus', description: 'Creating beautiful user experiences' },
-    { icon: Zap, title: 'Performance', description: 'Optimizing for speed and efficiency' },
-    { icon: Heart, title: 'Passion', description: 'Love for technology and innovation' }
-  ];
+  const getCurrentYear = () => new Date().getFullYear();
 
   return (
-    <section ref={sectionRef} id="about" className="py-20 bg-gradient-to-b from-black to-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4">
-            About <span className="text-red-500">Me</span>
+    <section ref={sectionRef} id="about" className="py-20 relative overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+            <span className="text-white">About </span>
+            <span className="text-red-600">Me</span>
           </h2>
-          <div className="w-24 h-1 bg-red-500 mx-auto mb-16 rounded-full"></div>
-          
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h3 className="text-2xl font-semibold text-white mb-4">
-                Passionate Developer & Problem Solver
-              </h3>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                {profile.about.experience}
-              </p>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                {profile.about.passion}
-              </p>
-              
-              <div className="grid grid-cols-2 gap-6 pt-6">
-                <div className="text-center p-4 bg-gray-800/50 rounded-lg border border-gray-700">
-                  <div className="text-3xl font-bold text-red-500 mb-2">{profile.about.stats.projects}+</div>
-                  <div className="text-gray-300">Projects Completed</div>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            Passionate developer with a love for creating innovative solutions
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Personal Information */}
+          <div className="space-y-8">
+            <div className={`bg-black/40 backdrop-blur-sm rounded-lg p-8 border border-gray-800/50 transition-all duration-1000 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`} style={{ transitionDelay: '200ms' }}>
+              <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                <div className="p-2 bg-red-600 rounded-lg">
+                  <Star size={24} />
                 </div>
-                <div className="text-center p-4 bg-gray-800/50 rounded-lg border border-gray-700">
-                  <div className="text-3xl font-bold text-red-500 mb-2">{profile.about.stats.years}+</div>
-                  <div className="text-gray-300">Years Experience</div>
+                Personal Information
+              </h3>
+              
+              <div className="space-y-6">
+                <div className="flex items-center gap-4 p-4 bg-black/30 backdrop-blur-sm rounded-lg">
+                  <div className="p-2 bg-red-600/20 rounded-lg">
+                    <MapPin size={20} className="text-red-400" />
+                  </div>
+                  <div>
+                    <div className="text-sm text-gray-400">Location</div>
+                    <div className="text-white font-medium">{profile.location}</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 p-4 bg-black/30 backdrop-blur-sm rounded-lg">
+                  <div className="p-2 bg-red-600/20 rounded-lg">
+                    <GraduationCap size={20} className="text-red-400" />
+                  </div>
+                  <div>
+                    <div className="text-sm text-gray-400">Education</div>
+                    <div className="text-white font-medium">Computer Science Degree</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 p-4 bg-black/30 backdrop-blur-sm rounded-lg">
+                  <div className="p-2 bg-red-600/20 rounded-lg">
+                    <Briefcase size={20} className="text-red-400" />
+                  </div>
+                  <div>
+                    <div className="text-sm text-gray-400">Experience</div>
+                    <div className="text-white font-medium">{getCurrentYear() - 2020} Years</div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 p-4 bg-black/30 backdrop-blur-sm rounded-lg">
+                  <div className="p-2 bg-red-600/20 rounded-lg">
+                    <Award size={20} className="text-red-400" />
+                  </div>
+                  <div>
+                    <div className="text-sm text-gray-400">Specialization</div>
+                    <div className="text-white font-medium">Full Stack Development</div>
+                  </div>
                 </div>
               </div>
             </div>
-            
-            <div className="grid grid-cols-2 gap-6">
-              {highlights.map((item, index) => (
-                <div
-                  key={`${profile.id}-${item.title}`}
-                  className={`bg-gray-800/50 p-6 rounded-xl border border-gray-700 hover:border-red-500/50 transition-all duration-300 hover:transform hover:scale-105 ${isVisible ? 'animate-fadeIn' : ''}`}
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <div className="bg-red-500/10 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                    <item.icon className="text-red-500" size={24} />
-                  </div>
-                  <h4 className="text-white font-semibold mb-2">{item.title}</h4>
-                  <p className="text-gray-400 text-sm">{item.description}</p>
+
+            {/* Statistics */}
+            <div className={`grid grid-cols-2 gap-4 transition-all duration-1000 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`} style={{ transitionDelay: '400ms' }}>
+              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-6 text-center border border-gray-800/50">
+                <div className="text-3xl font-bold text-red-500 mb-2">
+                  {animateStats ? profile.projects.length : 0}
                 </div>
-              ))}
+                <div className="text-gray-400">Projects</div>
+              </div>
+              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-6 text-center border border-gray-800/50">
+                <div className="text-3xl font-bold text-red-500 mb-2">
+                  {animateStats ? profile.skills.filter(s => s.level >= 80).length : 0}
+                </div>
+                <div className="text-gray-400">Skills</div>
+              </div>
+              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-6 text-center border border-gray-800/50">
+                <div className="text-3xl font-bold text-red-500 mb-2">
+                  {animateStats ? 4 : 0}
+                </div>
+                <div className="text-gray-400">Years</div>
+              </div>
+              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-6 text-center border border-gray-800/50">
+                <div className="text-3xl font-bold text-red-500 mb-2">
+                  {animateStats ? profile.skills.length : 0}
+                </div>
+                <div className="text-gray-400">Technologies</div>
+              </div>
             </div>
+          </div>
+
+          {/* Timeline */}
+          <div className={`bg-black/40 backdrop-blur-sm rounded-lg p-8 border border-gray-800/50 transition-all duration-1000 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`} style={{ transitionDelay: '600ms' }}>
+            <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+              <div className="p-2 bg-red-600 rounded-lg">
+                <Calendar size={24} />
+              </div>
+              Journey Timeline
+            </h3>
+            
+            <div className="space-y-6">
+              <div className={`relative pl-8 border-l-2 border-red-600 transition-all duration-1000 ${
+                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`} style={{ transitionDelay: '800ms' }}>
+                <div className="absolute left-[-9px] top-0 w-4 h-4 bg-red-600 rounded-full"></div>
+                <div className="bg-black/30 backdrop-blur-sm rounded-lg p-4">
+                  <div className="text-sm text-gray-400">2020</div>
+                  <div className="text-lg font-bold text-white mb-2">Started Programming Journey</div>
+                  <div className="text-gray-300 text-sm">Began learning web development and programming fundamentals</div>
+                </div>
+              </div>
+
+              <div className={`relative pl-8 border-l-2 border-red-600 transition-all duration-1000 ${
+                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`} style={{ transitionDelay: '1000ms' }}>
+                <div className="absolute left-[-9px] top-0 w-4 h-4 bg-red-600 rounded-full"></div>
+                <div className="bg-black/30 backdrop-blur-sm rounded-lg p-4">
+                  <div className="text-sm text-gray-400">2021</div>
+                  <div className="text-lg font-bold text-white mb-2">
+                    {profile.id === 'saksham' ? 'React & JavaScript Mastery' : 'First Project Completed'}
+                  </div>
+                  <div className="text-gray-300 text-sm">
+                    {profile.id === 'saksham' 
+                      ? 'Became proficient in React.js, JavaScript, and modern frontend development'
+                      : 'Built and deployed my first web application'
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <div className={`relative pl-8 border-l-2 border-red-600 transition-all duration-1000 ${
+                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`} style={{ transitionDelay: '1200ms' }}>
+                <div className="absolute left-[-9px] top-0 w-4 h-4 bg-red-600 rounded-full"></div>
+                <div className="bg-black/30 backdrop-blur-sm rounded-lg p-4">
+                  <div className="text-sm text-gray-400">2022</div>
+                  <div className="text-lg font-bold text-white mb-2">
+                    {profile.id === 'saksham' ? 'Full Stack Development' : 'Professional Experience'}
+                  </div>
+                  <div className="text-gray-300 text-sm">
+                    {profile.id === 'saksham'
+                      ? 'Expanded into Node.js, Express.js, and database technologies'
+                      : 'Started working on real-world projects and client work'
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <div className={`relative pl-8 border-l-2 border-red-600 transition-all duration-1000 ${
+                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`} style={{ transitionDelay: '1400ms' }}>
+                <div className="absolute left-[-9px] top-0 w-4 h-4 bg-red-600 rounded-full"></div>
+                <div className="bg-black/30 backdrop-blur-sm rounded-lg p-4">
+                  <div className="text-sm text-gray-400">2023</div>
+                  <div className="text-lg font-bold text-white mb-2">
+                    {profile.id === 'saksham' ? 'AI & Advanced APIs' : 'Advanced Technologies'}
+                  </div>
+                  <div className="text-gray-300 text-sm">
+                    {profile.id === 'saksham'
+                      ? 'Worked with Generative AI, REST APIs, and JWT Authentication'
+                      : 'Mastered modern frameworks and cloud technologies'
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <div className={`relative pl-8 border-l-2 border-red-600 transition-all duration-1000 ${
+                isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`} style={{ transitionDelay: '1600ms' }}>
+                <div className="absolute left-[-9px] top-0 w-4 h-4 bg-red-600 rounded-full"></div>
+                <div className="bg-black/30 backdrop-blur-sm rounded-lg p-4">
+                  <div className="text-sm text-gray-400">2024</div>
+                  <div className="text-lg font-bold text-white mb-2">Portfolio Launch</div>
+                  <div className="text-gray-300 text-sm">Created this comprehensive portfolio showcasing my work</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* About Description */}
+        <div className={`mt-16 bg-black/40 backdrop-blur-sm rounded-lg p-8 border border-gray-800/50 transition-all duration-1000 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`} style={{ transitionDelay: '1800ms' }}>
+          <div className="text-center">
+            <h3 className="text-2xl font-bold text-white mb-6">My Story</h3>
+            <p className="text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
+              {profile.description}
+            </p>
           </div>
         </div>
       </div>
