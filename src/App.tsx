@@ -23,7 +23,7 @@ function App() {
         <About key={`about-${selectedProfile.id}`} profile={selectedProfile} />
         <Skills key={`skills-${selectedProfile.id}`} profile={selectedProfile} />
         <Projects key={`projects-${selectedProfile.id}`} profile={selectedProfile} />
-        <Contact />
+        <Contact key={`contact-${selectedProfile.id}`} profile={selectedProfile} />
       </main>
       <Footer key={`footer-${selectedProfile.id}`} profile={selectedProfile} />
     </div>

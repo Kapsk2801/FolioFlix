@@ -24,6 +24,7 @@ export interface Profile {
   github: string;
   linkedin: string;
   email: string;
+  phone: string;
   resume: string;
   skills: Skill[];
   projects: Project[];
@@ -44,9 +45,10 @@ export const profiles: Profile[] = [
     role: 'Full Stack Developer & UI/UX Enthusiast',
     description: 'Crafting exceptional digital experiences with modern technologies. Passionate about creating clean, efficient code and beautiful user interfaces.',
     avatar: '👨‍💻',
-    github: 'https://github.com/sakshamkapoor',
-    linkedin: 'https://linkedin.com/in/sakshamkapoor',
-    email: 'mailto:saksham@example.com',
+    github: 'https://github.com/Kapsk2801',
+    linkedin: 'https://www.linkedin.com/in/sakshamrkapoor',
+    email: 'mailto:kapoorsaksham25@gmail.com',
+    phone: '+91 9876543210',
     resume: '#',
     skills: [
       { name: 'React/Next.js', level: 95, category: 'Frontend' },
@@ -105,9 +107,10 @@ export const profiles: Profile[] = [
     role: 'Full Stack Developer & Tech Enthusiast',
     description: 'Building innovative solutions with cutting-edge technologies. Focused on scalable architecture and user-centric design.',
     avatar: '👨‍💻',
-    github: 'https://github.com/aayushchawla',
-    linkedin: 'https://linkedin.com/in/aayushchawla',
-    email: 'mailto:aayush@example.com',
+    github: 'https://github.com/Aayush-Chawla',
+    linkedin: 'https://www.linkedin.com/in/aayush-chawla-1952b9224?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BXQTOXF71R3OqmV2BkS9eZQ%3D%3D',
+    email: 'mailto:aayushchawla5554@gmail.com',
+    phone: '+91 8765432109',
     resume: '#',
     skills: [
       { name: 'Vue.js/Nuxt.js', level: 92, category: 'Frontend' },

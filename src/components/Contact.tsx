@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Profile } from '../data/profiles';
 
-const Contact = () => {
+interface ContactProps {
+  profile: Profile;
+}
+
+const Contact: React.FC<ContactProps> = ({ profile }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -50,19 +55,19 @@ const Contact = () => {
     {
       icon: Mail,
       title: 'Email',
-      value: 'john.doe@example.com',
-      link: 'mailto:john.doe@example.com'
+      value: profile.email.replace('mailto:', ''),
+      link: profile.email
     },
     {
       icon: Phone,
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      link: 'tel:+15551234567'
+      value: profile.phone,
+      link: `tel:${profile.phone.replace(/\s/g, '')}`
     },
     {
       icon: MapPin,
       title: 'Location',
-      value: 'San Francisco, CA',
+      value: profile.id === 'saksham' ? 'Mumbai, India' : 'Delhi, India',
       link: '#'
     }
   ];
