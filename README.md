@@ -77,5 +77,4 @@ The build creates optimized files in the `dist/` directory:
 - `tailwind.config.js` - Styling configuration
 
 ---
-
-**Ready to deploy!** 🚀 
+See live project :  https://folio-flix-hv7y.vercel.app/
