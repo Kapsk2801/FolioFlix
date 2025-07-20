@@ -48,7 +48,7 @@ export const profiles: Profile[] = [
     github: 'https://github.com/Kapsk2801',
     linkedin: 'https://www.linkedin.com/in/sakshamrkapoor',
     email: 'mailto:kapoorsaksham25@gmail.com',
-    phone: '+91 9876543210',
+    phone: '(+91 98765 43210) - not actual number',
     resume: '#',
     skills: [
       { name: 'React/Next.js', level: 95, category: 'Frontend' },
@@ -130,7 +130,7 @@ export const profiles: Profile[] = [
     github: 'https://github.com/Aayush-Chawla',
     linkedin: 'https://www.linkedin.com/in/aayush-chawla-1952b9224?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BXQTOXF71R3OqmV2BkS9eZQ%3D%3D',
     email: 'mailto:aayushchawla5554@gmail.com',
-    phone: '+91 8765432109',
+    phone: '(+91 87654 32109) - not actual number',
     resume: '#',
     skills: [
       { name: 'Python', level: 90, category: 'Programming Languages' },

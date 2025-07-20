@@ -135,12 +135,12 @@ const About: React.FC<AboutProps> = ({ profile }) => {
           </div>
 
           {/* Timeline */}
-          <div className={`bg-black/40 backdrop-blur-sm rounded-lg p-8 border border-gray-800/50 transition-all duration-1000 ${
+          <div className={`bg-black/40 backdrop-blur-sm rounded-lg p-4 sm:p-6 lg:p-8 border border-gray-800/50 transition-all duration-1000 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`} style={{ transitionDelay: '600ms' }}>
-            <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
-              <div className="p-2 bg-red-600 rounded-lg">
-                <Calendar size={24} />
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8 flex items-center gap-2 sm:gap-3">
+              <div className="p-1.5 sm:p-2 bg-red-600 rounded-lg">
+                <Calendar size={20} className="sm:w-6 sm:h-6" />
               </div>
               Journey Timeline
             </h3>

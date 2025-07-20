@@ -222,11 +222,11 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
           
           {/* Enhanced skill badges with hover effects */}
           {showSkills && (
-            <div className="flex justify-center gap-3 mb-8">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 px-4">
               {topSkills.map((skill, index) => (
                 <div
                   key={skill.name}
-                  className="group flex items-center gap-2 bg-black/40 backdrop-blur-sm text-red-300 px-4 py-2 rounded-full border border-red-600/30 hover:bg-red-600/20 transition-all duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-red-600/25 cursor-pointer"
+                  className="group flex items-center gap-1 sm:gap-2 bg-black/40 backdrop-blur-sm text-red-300 px-3 sm:px-4 py-2 rounded-full border border-red-600/30 hover:bg-red-600/20 transition-all duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-red-600/25 cursor-pointer"
                   style={{ 
                     animationDelay: `${index * 0.2}s`,
                     transform: hoveredElement === skill.name ? 'scale(1.1) translateY(-2px)' : 'scale(1)',
@@ -238,8 +238,8 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
                   <div className="group-hover:rotate-12 transition-transform duration-300">
                     {getSkillIcon(skill.name)}
                   </div>
-                  <span className="text-sm font-medium">{skill.name}</span>
-                  <span className="text-xs opacity-75 bg-red-600/20 px-2 py-1 rounded-full">{skill.level}%</span>
+                  <span className="text-xs sm:text-sm font-medium">{skill.name}</span>
+                  <span className="text-xs opacity-75 bg-red-600/20 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full">{skill.level}%</span>
                 </div>
               ))}
             </div>

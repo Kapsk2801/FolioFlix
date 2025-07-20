@@ -81,7 +81,7 @@ const Contact: React.FC<ContactProps> = ({ profile }) => {
           </h2>
           <div className="w-20 sm:w-24 h-1 bg-red-500 mx-auto mb-12 sm:mb-16 rounded-full"></div>
           
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
             <div className="space-y-6 sm:space-y-8">
               <div>
                 <h3 className="text-xl sm:text-2xl font-semibold text-white mb-4 sm:mb-6">Let's Work Together</h3>
@@ -104,7 +104,14 @@ const Contact: React.FC<ContactProps> = ({ profile }) => {
                     </div>
                     <div>
                       <h4 className="text-white font-semibold text-sm sm:text-base">{info.title}</h4>
-                      <p className="text-gray-400 text-sm sm:text-base">{info.value}</p>
+                      {info.title === 'Phone' ? (
+                        <div className="text-sm sm:text-base">
+                          <span className="text-gray-400">{profile.phone.split(' - ')[0]}</span>
+                          <span className="text-gray-500 italic ml-1">- not actual number</span>
+                        </div>
+                      ) : (
+                        <p className="text-gray-400 text-sm sm:text-base">{info.value}</p>
+                      )}
                     </div>
                   </a>
                 ))}

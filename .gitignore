@@ -1,14 +1,27 @@
-# Dependencies
-node_modules/
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+lerna-debug.log*
 
-# Build outputs
-dist/
-build/
-*.tsbuildinfo
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # Environment variables
 .env
@@ -17,31 +30,19 @@ build/
 .env.test.local
 .env.production.local
 
-# IDE and editor files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+# Vercel
+.vercel
 
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# Build outputs
+build/
+out/
 
-# Logs
-logs
-*.log
+# Cache
+.cache/
+.parcel-cache/
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
+# TypeScript
+*.tsbuildinfo
 
 # Coverage directory used by tools like istanbul
 coverage/
@@ -51,6 +52,7 @@ coverage/
 .nyc_output
 
 # Dependency directories
+node_modules/
 jspm_packages/
 
 # Optional npm cache directory
@@ -74,6 +76,9 @@ jspm_packages/
 # Yarn Integrity file
 .yarn-integrity
 
+# dotenv environment variables file
+.env.test
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
@@ -96,6 +101,3 @@ public
 # Temporary folders
 tmp/
 temp/
-
-# Vercel
-.vercel
