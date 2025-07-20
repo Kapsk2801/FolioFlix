@@ -1,5 +1,6 @@
 import React from 'react';
 import { Heart, ArrowUp } from 'lucide-react';
+import Logo from './Logo';
 import { Profile } from '../data/profiles';
 
 interface FooterProps {
@@ -16,13 +17,7 @@ const Footer: React.FC<FooterProps> = ({ profile }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
           <div className="flex items-center space-x-2 sm:space-x-3 text-gray-400 mb-4 md:mb-0">
-            <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-md border border-gray-600 overflow-hidden relative">
-              <img 
-                src="/Logo.png" 
-                alt="FolioFlix Logo" 
-                className="absolute inset-0 w-full h-full object-cover transform translate-x-0.5 -translate-y-0.5"
-              />
-            </div>
+            <Logo size="sm" />
             <span className="text-sm sm:text-base">Made with</span>
             <Heart className="text-red-500 sm:w-4 sm:h-4" size={14} fill="currentColor" />
             <span className="text-sm sm:text-base">by {profile.name}</span>

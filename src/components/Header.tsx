@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import ProfileSelector from './ProfileSelector';
+import Logo from './Logo';
 import { Profile } from '../data/profiles';
 
 interface HeaderProps {
@@ -49,14 +50,7 @@ const Header: React.FC<HeaderProps> = ({ selectedProfile, onProfileSelect }) => 
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
             <div className="flex items-center space-x-2 sm:space-x-3">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-md border border-gray-600 overflow-hidden relative group">
-                <img 
-                  src="/Logo.png" 
-                  alt="FolioFlix Logo" 
-                  className="absolute inset w-full h-full -translate-y-1 -translate-x object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-red-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
+              <Logo size="md" />
               <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-red-500 to-red-300 bg-clip-text text-transparent hover:from-red-400 hover:to-red-200 transition-all duration-300">FolioFlix</span>
             </div>
           </div>

@@ -19,15 +19,26 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
           setTimeout(() => setAnimateProgress(true), 500);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect();
-  }, []);
+    // Fallback: if intersection observer doesn't work, trigger after 1 second
+    const fallbackTimer = setTimeout(() => {
+      if (!isVisible) {
+        setIsVisible(true);
+        setTimeout(() => setAnimateProgress(true), 500);
+      }
+    }, 1000);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallbackTimer);
+    };
+  }, [isVisible]);
 
   // Updated skills for Saksham
   const skills = profile.id === 'saksham' ? [
@@ -94,11 +105,11 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
                 {category}
               </h3>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
                 {categorySkills.map((skill, index) => (
                   <div
                     key={skill.name}
-                    className={`bg-black/30 backdrop-blur-sm rounded-lg p-4 sm:p-6 border border-gray-700/50 hover:border-red-600/50 transition-all duration-500 ${
+                    className={`bg-black/30 backdrop-blur-sm rounded-lg p-3 sm:p-4 lg:p-6 border border-gray-700/50 hover:border-red-600/50 transition-all duration-500 ${
                       isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                     }`}
                     style={{ 
@@ -106,14 +117,14 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
                       animation: isVisible ? 'fadeInUp 0.6s ease-out forwards' : 'none'
                     }}
                   >
-                    <div className="flex items-center justify-between mb-3 sm:mb-4">
-                      <h4 className="text-base sm:text-lg font-semibold text-white">{skill.name}</h4>
-                      <span className="text-xl sm:text-2xl font-bold text-red-500">{skill.level}%</span>
+                    <div className="flex items-center justify-between mb-2 sm:mb-3 lg:mb-4">
+                      <h4 className="text-sm sm:text-base lg:text-lg font-semibold text-white">{skill.name}</h4>
+                      <span className="text-lg sm:text-xl lg:text-2xl font-bold text-red-500">{skill.level}%</span>
                     </div>
                     
-                    <div className="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden">
+                    <div className="w-full bg-gray-700/50 rounded-full h-2 sm:h-3 overflow-hidden">
                       <div
-                        className="h-3 bg-gradient-to-r from-red-600 to-red-500 rounded-full transition-all duration-1000 ease-out"
+                        className="h-2 sm:h-3 bg-gradient-to-r from-red-600 to-red-500 rounded-full transition-all duration-1000 ease-out"
                         style={{
                           width: animateProgress ? `${skill.level}%` : '0%'
                         }}

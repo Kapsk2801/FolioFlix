@@ -110,7 +110,7 @@ const Projects: React.FC<ProjectsProps> = ({ profile }) => {
           {/* Enhanced search and filter controls */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-6 sm:mb-8 px-4">
             {/* Enhanced search bar */}
-            <div className="relative group">
+            <div className="relative group w-full sm:w-auto">
               <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 transition-colors duration-300 ${isSearchFocused ? 'text-red-500' : 'text-gray-400'}`} size={20} />
               <input
                 type="text"
@@ -133,7 +133,7 @@ const Projects: React.FC<ProjectsProps> = ({ profile }) => {
             </div>
 
             {/* Enhanced category filter */}
-            <div className="relative group">
+            <div className="relative group w-full sm:w-auto">
               <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 group-hover:text-red-500 transition-colors duration-300" size={20} />
               <select
                 value={selectedCategory}

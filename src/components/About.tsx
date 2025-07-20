@@ -45,7 +45,7 @@ const About: React.FC<AboutProps> = ({ profile }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
           {/* Personal Information */}
           <div className="space-y-8">
             <div className={`bg-black/40 backdrop-blur-sm rounded-lg p-4 sm:p-6 lg:p-8 border border-gray-800/50 transition-all duration-1000 ${
@@ -104,32 +104,32 @@ const About: React.FC<AboutProps> = ({ profile }) => {
             </div>
             
             {/* Statistics */}
-            <div className={`grid grid-cols-2 gap-3 sm:gap-4 transition-all duration-1000 ${
+            <div className={`grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4 transition-all duration-1000 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`} style={{ transitionDelay: '400ms' }}>
-              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 sm:p-6 text-center border border-gray-800/50">
-                <div className="text-2xl sm:text-3xl font-bold text-red-500 mb-2">
+              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-3 sm:p-4 lg:p-6 text-center border border-gray-800/50">
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-red-500 mb-1 sm:mb-2">
                   {animateStats ? profile.projects.length : 0}
                 </div>
-                <div className="text-gray-400 text-sm sm:text-base">Projects</div>
+                <div className="text-gray-400 text-xs sm:text-sm lg:text-base">Projects</div>
               </div>
-              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 sm:p-6 text-center border border-gray-800/50">
-                <div className="text-2xl sm:text-3xl font-bold text-red-500 mb-2">
+              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-3 sm:p-4 lg:p-6 text-center border border-gray-800/50">
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-red-500 mb-1 sm:mb-2">
                   {animateStats ? profile.skills.filter(s => s.level >= 80).length : 0}
                 </div>
-                <div className="text-gray-400 text-sm sm:text-base">Skills</div>
+                <div className="text-gray-400 text-xs sm:text-sm lg:text-base">Skills</div>
               </div>
-              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 sm:p-6 text-center border border-gray-800/50">
-                <div className="text-2xl sm:text-3xl font-bold text-red-500 mb-2">
+              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-3 sm:p-4 lg:p-6 text-center border border-gray-800/50">
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-red-500 mb-1 sm:mb-2">
                   {animateStats ? '2+' : '0'}
                 </div>
-                <div className="text-gray-400 text-sm sm:text-base">Years</div>
+                <div className="text-gray-400 text-xs sm:text-sm lg:text-base">Years</div>
               </div>
-              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-4 sm:p-6 text-center border border-gray-800/50">
-                <div className="text-2xl sm:text-3xl font-bold text-red-500 mb-2">
+              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-3 sm:p-4 lg:p-6 text-center border border-gray-800/50">
+                <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-red-500 mb-1 sm:mb-2">
                   {animateStats ? profile.skills.length : 0}
                 </div>
-                <div className="text-gray-400 text-sm sm:text-base">Technologies</div>
+                <div className="text-gray-400 text-xs sm:text-sm lg:text-base">Technologies</div>
               </div>
             </div>
           </div>
