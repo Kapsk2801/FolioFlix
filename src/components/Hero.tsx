@@ -71,7 +71,7 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
               className="border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
             >
               Get In Touch
-            </a>
+            </button>
           </div>
           
           <div className="flex justify-center space-x-6">
