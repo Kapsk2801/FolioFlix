@@ -117,7 +117,7 @@ export const profiles: Profile[] = [
       { name: 'Docker/Kubernetes', level: 78, category: 'DevOps' },
       { name: 'SCSS/Stylus', level: 90, category: 'Styling' },
       { name: 'REST APIs', level: 85, category: 'API' },
-      { name: 'Microservices', level: 75, category: 'Architecture' }
+      { name: 'Microservices', level: 75, category: 'Backend' }
     ],
     projects: [
       {

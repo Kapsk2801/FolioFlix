@@ -30,7 +30,8 @@ const ProfileSelector: React.FC<ProfileSelectorProps> = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isOpen, onToggle]);
+  }, [isOpen]);
+
   return (
     <div className="relative" ref={dropdownRef}>
       {/* Profile Button */}
@@ -56,8 +57,9 @@ const ProfileSelector: React.FC<ProfileSelectorProps> = ({
                 <button
                   key={profile.id}
                   onClick={() => {
+                    console.log('Profile selected:', profile.name);
                     onProfileSelect(profile);
-                    onToggle();
+                    if (isOpen) onToggle();
                   }}
                   className={`w-full flex items-center space-x-3 p-3 rounded-lg transition-all duration-200 ${
                     selectedProfile.id === profile.id

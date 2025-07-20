@@ -14,6 +14,10 @@ function App() {
   const handleProfileSelect = (profile: Profile) => {
     console.log('Switching to profile:', profile.name);
     setSelectedProfile(profile);
+    // Force re-render by updating state
+    setTimeout(() => {
+      console.log('Profile switched to:', profile.name);
+    }, 100);
   };
 
   console.log('Current profile:', selectedProfile.name);

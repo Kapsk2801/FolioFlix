@@ -27,6 +27,7 @@ const Header: React.FC<HeaderProps> = ({ selectedProfile, onProfileSelect }) => 
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
+    setIsProfileSelectorOpen(false);
   };
 
   return (
