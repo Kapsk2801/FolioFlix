@@ -11,6 +11,8 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
   const sectionRef = useRef<HTMLElement>(null);
 
   const skills = profile.skills;
+  
+
   const categories = [...new Set(skills.map(skill => skill.category))];
 
   useEffect(() => {

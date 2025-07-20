@@ -10,49 +10,22 @@ import { profiles, Profile } from './data/profiles';
 
 function App() {
   const [selectedProfile, setSelectedProfile] = useState<Profile>(profiles[0]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleProfileSelect = (profile: Profile) => {
-    console.log('Switching to profile:', profile.name);
-    setIsLoading(true);
-    
-    // Force a brief loading state to ensure clean re-render
-    setTimeout(() => {
-      setSelectedProfile(profile);
-      setIsLoading(false);
-      console.log('Profile switched to:', profile.name);
-    }, 100);
+    setSelectedProfile(profile);
   };
-
-  // Debug logging
-  useEffect(() => {
-    console.log('Current selected profile:', selectedProfile.name);
-    console.log('Profile skills:', selectedProfile.skills.map(s => s.name));
-    console.log('Profile projects:', selectedProfile.projects.map(p => p.title));
-  }, [selectedProfile]);
-
-  if (isLoading) {
-    return (
-      <div className="bg-black text-white min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-300">Switching profile...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-black text-white min-h-screen">
       <Header selectedProfile={selectedProfile} onProfileSelect={handleProfileSelect} />
       <main>
-        <Hero profile={selectedProfile} />
-        <About profile={selectedProfile} />
-        <Skills profile={selectedProfile} />
-        <Projects profile={selectedProfile} />
+        <Hero key={`hero-${selectedProfile.id}`} profile={selectedProfile} />
+        <About key={`about-${selectedProfile.id}`} profile={selectedProfile} />
+        <Skills key={`skills-${selectedProfile.id}`} profile={selectedProfile} />
+        <Projects key={`projects-${selectedProfile.id}`} profile={selectedProfile} />
         <Contact />
       </main>
-      <Footer profile={selectedProfile} />
+      <Footer key={`footer-${selectedProfile.id}`} profile={selectedProfile} />
     </div>
   );
 }

@@ -10,14 +10,10 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Reset animation when profile changes
-    setIsVisible(false);
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 100);
-    
-    return () => clearTimeout(timer);
+    setIsVisible(true);
   }, [profile.id]); // Re-run when profile changes
+
+
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">

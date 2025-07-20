@@ -11,7 +11,6 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ selectedProfile, onProfileSelect }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isProfileSelectorOpen, setIsProfileSelectorOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +26,6 @@ const Header: React.FC<HeaderProps> = ({ selectedProfile, onProfileSelect }) => 
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
-    setIsProfileSelectorOpen(false);
   };
 
   return (
@@ -59,8 +57,6 @@ const Header: React.FC<HeaderProps> = ({ selectedProfile, onProfileSelect }) => 
             <ProfileSelector
               selectedProfile={selectedProfile}
               onProfileSelect={onProfileSelect}
-              isOpen={isProfileSelectorOpen}
-              onToggle={() => setIsProfileSelectorOpen(!isProfileSelectorOpen)}
             />
           </div>
           
@@ -68,8 +64,6 @@ const Header: React.FC<HeaderProps> = ({ selectedProfile, onProfileSelect }) => 
             <ProfileSelector
               selectedProfile={selectedProfile}
               onProfileSelect={onProfileSelect}
-              isOpen={isProfileSelectorOpen}
-              onToggle={() => setIsProfileSelectorOpen(!isProfileSelectorOpen)}
             />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}

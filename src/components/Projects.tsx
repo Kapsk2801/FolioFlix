@@ -12,6 +12,8 @@ const Projects: React.FC<ProjectsProps> = ({ profile }) => {
   const sectionRef = useRef<HTMLElement>(null);
 
   const projects: Project[] = profile.projects;
+  
+
 
   useEffect(() => {
     // Reset visibility when profile changes
