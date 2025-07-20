@@ -14,6 +14,10 @@ const Projects: React.FC<ProjectsProps> = ({ profile }) => {
   const projects: Project[] = profile.projects;
 
   useEffect(() => {
+    // Reset visibility when profile changes
+    setIsVisible(false);
+    setSelectedProject(null);
+    
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -28,7 +32,7 @@ const Projects: React.FC<ProjectsProps> = ({ profile }) => {
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [profile.id]); // Re-run when profile changes
 
   return (
     <section ref={sectionRef} id="projects" className="py-20 bg-gradient-to-b from-gray-900 to-black">
@@ -42,7 +46,7 @@ const Projects: React.FC<ProjectsProps> = ({ profile }) => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <div
-                key={project.id}
+                key={`${profile.id}-${project.id}`}
                 className={`group relative bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-red-500/50 transition-all duration-300 hover:transform hover:scale-105 cursor-pointer ${isVisible ? 'animate-fadeIn' : ''}`}
                 style={{ animationDelay: `${index * 0.1}s` }}
                 onClick={() => setSelectedProject(project)}
@@ -74,7 +78,7 @@ const Projects: React.FC<ProjectsProps> = ({ profile }) => {
                   
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.slice(0, 3).map((tag) => (
-                      <span key={tag} className="px-2 py-1 bg-gray-700 text-gray-300 rounded text-xs">
+                      <span key={`${project.id}-${tag}`} className="px-2 py-1 bg-gray-700 text-gray-300 rounded text-xs">
                         {tag}
                       </span>
                     ))}
@@ -137,7 +141,7 @@ const Projects: React.FC<ProjectsProps> = ({ profile }) => {
               
               <div className="flex flex-wrap gap-2 mb-6">
                 {selectedProject.tags.map((tag) => (
-                  <span key={tag} className="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-sm border border-red-500/30">
+                  <span key={`modal-${selectedProject.id}-${tag}`} className="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-sm border border-red-500/30">
                     {tag}
                   </span>
                 ))}

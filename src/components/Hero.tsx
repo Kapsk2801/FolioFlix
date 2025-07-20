@@ -10,8 +10,14 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
-  }, []);
+    // Reset animation when profile changes
+    setIsVisible(false);
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [profile.id]); // Re-run when profile changes
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -22,7 +28,7 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
       <div className="absolute inset-0">
         {[...Array(20)].map((_, i) => (
           <div
-            key={i}
+            key={`${profile.id}-${i}`}
             className="absolute w-1 h-1 bg-red-500 rounded-full animate-pulse"
             style={{
               top: `${Math.random() * 100}%`,
@@ -65,7 +71,7 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
               className="border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
             >
               Get In Touch
-            </button>
+            </a>
           </div>
           
           <div className="flex justify-center space-x-6">
@@ -75,7 +81,7 @@ const Hero: React.FC<HeroProps> = ({ profile }) => {
               { icon: Mail, href: profile.email, label: 'Email' }
             ].map((social, index) => (
               <a
-                key={social.label}
+                key={`${profile.id}-${social.label}`}
                 href={social.href}
                 className="text-gray-400 hover:text-red-500 transition-all duration-300 transform hover:scale-110 p-3 rounded-full hover:bg-red-500/10"
                 style={{ animationDelay: `${index * 0.1}s` }}

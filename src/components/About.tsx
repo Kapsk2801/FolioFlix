@@ -11,6 +11,9 @@ const About: React.FC<AboutProps> = ({ profile }) => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    // Reset visibility when profile changes
+    setIsVisible(false);
+    
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -25,7 +28,7 @@ const About: React.FC<AboutProps> = ({ profile }) => {
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [profile.id]); // Re-run when profile changes
 
   const highlights = [
     { icon: Code, title: 'Clean Code', description: 'Writing maintainable and efficient code' },
@@ -70,7 +73,7 @@ const About: React.FC<AboutProps> = ({ profile }) => {
             <div className="grid grid-cols-2 gap-6">
               {highlights.map((item, index) => (
                 <div
-                  key={item.title}
+                  key={`${profile.id}-${item.title}`}
                   className={`bg-gray-800/50 p-6 rounded-xl border border-gray-700 hover:border-red-500/50 transition-all duration-300 hover:transform hover:scale-105 ${isVisible ? 'animate-fadeIn' : ''}`}
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >

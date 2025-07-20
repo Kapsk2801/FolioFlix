@@ -11,10 +11,13 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
   const sectionRef = useRef<HTMLElement>(null);
 
   const skills = profile.skills;
-
   const categories = [...new Set(skills.map(skill => skill.category))];
 
   useEffect(() => {
+    // Reset animations when profile changes
+    setIsVisible(false);
+    setAnimatedBars([]);
+    
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -32,7 +35,7 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
     }
 
     return () => observer.disconnect();
-  }, [skills.length]);
+  }, [profile.id, skills.length]); // Re-run when profile changes
 
   const getCategoryColor = (category: string) => {
     const colors: { [key: string]: string } = {
@@ -45,6 +48,15 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
       API: 'bg-cyan-500'
     };
     return colors[category] || 'bg-gray-500';
+  };
+
+  const getCurrentlyLearning = () => {
+    if (profile.id === 'saksham') {
+      return ['Rust', 'WebAssembly', 'Three.js', 'Blockchain'];
+    } else if (profile.id === 'aayush') {
+      return ['Go', 'Kubernetes', 'GraphQL', 'Serverless'];
+    }
+    return ['React Native', 'Machine Learning', 'Cloud Computing'];
   };
 
   return (
@@ -60,7 +72,7 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
             <div className="space-y-8">
               <h3 className="text-2xl font-semibold text-white mb-6">Technical Expertise</h3>
               {skills.map((skill, index) => (
-                <div key={skill.name} className="space-y-2">
+                <div key={`${profile.id}-${skill.name}`} className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-white font-medium">{skill.name}</span>
                     <span className="text-gray-400">{skill.level}%</span>
@@ -89,7 +101,7 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
                   
                   return (
                     <div
-                      key={category}
+                      key={`${profile.id}-${category}`}
                       className={`bg-gray-800/50 p-4 rounded-xl border border-gray-700 hover:border-red-500/50 transition-all duration-300 hover:transform hover:scale-105 ${isVisible ? 'animate-fadeIn' : ''}`}
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
@@ -115,18 +127,11 @@ const Skills: React.FC<SkillsProps> = ({ profile }) => {
               <div className="mt-8 p-6 bg-gradient-to-r from-red-500/10 to-red-600/10 rounded-xl border border-red-500/20">
                 <h4 className="text-white font-semibold mb-3">Currently Learning</h4>
                 <div className="flex flex-wrap gap-2">
-                  {profile.id === 'saksham' 
-                    ? ['Rust', 'WebAssembly', 'Three.js', 'Blockchain'].map((tech) => (
-                        <span key={tech} className="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-sm border border-red-500/30">
-                          {tech}
-                        </span>
-                      ))
-                    : ['Go', 'Kubernetes', 'GraphQL', 'Serverless'].map((tech) => (
-                        <span key={tech} className="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-sm border border-red-500/30">
-                          {tech}
-                        </span>
-                      ))
-                  }
+                  {getCurrentlyLearning().map((tech) => (
+                    <span key={`${profile.id}-${tech}`} className="px-3 py-1 bg-red-500/20 text-red-300 rounded-full text-sm border border-red-500/30">
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
